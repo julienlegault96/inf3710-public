@@ -1,0 +1,14 @@
+{
+    "extends": "../tsconfig.json",
+    "compilerOptions": {
+        "outDir": "./build",
+    },
+    "exclude": [
+        "node_modules",
+        ".*",
+        "**/*.spec.ts"
+    ],
+    "include": [
+        "src/**/*.ts"
+    ]
+}

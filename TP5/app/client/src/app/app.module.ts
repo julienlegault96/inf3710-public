@@ -3,6 +3,7 @@ import { NgModule } from "@angular/core";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { RootComponent } from "@components/root/root.component";
+import { SocketService } from "@services/socket.service";
 
 @NgModule({
     declarations: [
@@ -12,7 +13,9 @@ import { RootComponent } from "@components/root/root.component";
         BrowserModule,
         AppRoutingModule,
     ],
-    providers: [],
+    providers: [
+        SocketService,
+    ],
     bootstrap: [
         RootComponent,
     ],

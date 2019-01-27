@@ -1,33 +1,18 @@
 {
-    "compileOnSave": false,
+    "extends": "../tsconfig.json",
     "compilerOptions": {
-        "baseUrl": "./",
-        "target": "es6",
-        "module": "commonjs",
-        "moduleResolution": "node",
-        "outDir": "build",
-        "sourceMap": true,
-        "allowSyntheticDefaultImports": true,
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "noImplicitAny": true,
-        "noImplicitThis": true,
-        "noFallthroughCasesInSwitch": true,
-        "noUnusedLocals": false,
-        "noImplicitReturns": true,
-        "removeComments": false,
-        "suppressImplicitAnyIndexErrors": true,
-        "strictNullChecks": true,
+        "outDir": "./build",
         "declaration": false,
+        "baseUrl": "./",
         "paths": {
             "@components/*": [
                 "./src/app/components/*"
             ],
+            "@services/*": [
+                "./src/app/services/*"
+            ],
             "@common/*": [
                 "../common/*"
-            ],
-            "@lib/*": [
-                "./lib/*"
             ]
         }
     }
