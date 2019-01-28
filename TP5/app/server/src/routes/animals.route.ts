@@ -1,7 +1,9 @@
 import { injectable, inject } from "inversify";
 import { Request, Response, NextFunction } from "express";
-import { AnimalService } from "../services/animal.service";
+
 import { StatusCodes } from "../status-codes";
+
+import { AnimalService } from "../services/animal.service";
 
 @injectable()
 export class AnimalsRoute {
@@ -15,8 +17,7 @@ export class AnimalsRoute {
     }
 
     public getAnimals(req: Request, res: Response, next: NextFunction): void {
-        res
-            .status(StatusCodes.OK)
+        res.status(StatusCodes.Ok)
             .send(JSON.stringify(this.animalService.getAnimals()));
     }
 

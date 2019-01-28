@@ -1,5 +1,5 @@
 export namespace ClientHost {
-    export const hostname: string = "localhost";
-    export const port: number = 4200;
-    export const address: string = `http://${hostname}:${port}`;
+    export const Hostname: string = "localhost";
+    export const Port: number = 4200;
+    export const Address: string = `http://${Hostname}:${Port}`;
 }

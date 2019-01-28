@@ -1,5 +1,8 @@
 export enum StatusCodes {
-    OK = 200,
-    BAD_REQUEST = 400,
-    SERVER_ERROR = 500,
+    Ok = 200,
+    Created = 201,
+    BadRequest = 400,
+    NotFound = 404,
+    ServerError = 500,
+    NotImplemented = 501,
 }

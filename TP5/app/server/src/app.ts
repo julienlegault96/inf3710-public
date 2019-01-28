@@ -1,13 +1,13 @@
 import { injectable, inject } from "inversify";
 import * as Express from "express";
-import { ServerHost } from "../../common/hosts/server-host";
+import * as bodyParser from "body-parser";
 
+import { ServerHost } from "../../common/hosts/server-host";
 import { RouterFactory } from "./router-factory";
 
 @injectable()
 export class App {
 
-    // private socket: Socket;
     private expressApp: Express.Application;
     private routes: RouterFactory;
 
@@ -15,16 +15,24 @@ export class App {
         @inject(RouterFactory) routes: RouterFactory
     ) {
         this.expressApp = Express();
+        this.config();
         this.routes = routes;
     }
 
     public start(): void {
         this.expressApp.use(this.routes.getRoutes());
+        this.expressApp.listen(ServerHost.Port);
+    }
 
-        this.expressApp.listen(ServerHost.port, () => {
-            // tslint:disable-next-line:no-console
-            console.log(`Listening on port ${ServerHost.port}`);
-        });
+    private config(): void {
+        this.expressApp
+            .use(bodyParser.json({ limit: "10000kb" }))
+            .use(bodyParser.urlencoded({ extended: true }))
+            .use((req: Express.Request, res: Express.Response, next: Express.NextFunction) => {
+                res.setHeader("Access-Control-Allow-Origin", "*");
+
+                next();
+            });
     }
 
 }

@@ -12,6 +12,7 @@
         "lint": "tslint --project tsconfig.json --format stylish --force src/**/*.ts"
     },
     "dependencies": {
+        "cors": "^2.8.5",
         "express": "^4.16.4",
         "inversify": "^5.0.1",
         "reflect-metadata": "^0.1.12",

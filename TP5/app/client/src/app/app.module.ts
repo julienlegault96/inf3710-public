@@ -1,20 +1,26 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
+import { HttpClientModule } from "@angular/common/http";
 
 import { AppRoutingModule } from "./app-routing.module";
+
+import { AnimalService } from "@services/animal.service";
+
 import { RootComponent } from "@components/root/root.component";
-import { SocketService } from "@services/socket.service";
+import { DashboardComponent } from "@components/dashboard/dashboard.component";
 
 @NgModule({
     declarations: [
         RootComponent,
+        DashboardComponent,
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
+        HttpClientModule,
     ],
     providers: [
-        SocketService,
+        AnimalService,
     ],
     bootstrap: [
         RootComponent,
