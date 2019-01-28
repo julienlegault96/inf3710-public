@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 
 import { AnimalService } from "@services/animal.service";
+import { Animal } from "@common/animal";
 
 @Component({
     selector: "app-dashboard",
@@ -10,17 +11,17 @@ import { AnimalService } from "@services/animal.service";
 
 export class DashboardComponent implements OnInit {
 
-    public animals: Array<string>;
+    public animals: Array<Animal>;
     private animalService: AnimalService;
 
     public constructor(animalService: AnimalService) {
-        this.animalService = animalService;
         this.animals = [];
+        this.animalService = animalService;
     }
 
     public ngOnInit(): void {
         this.animalService.getAnimals()
-            .subscribe((animals: Array<string>) => {
+            .subscribe((animals: Array<Animal>) => {
                 this.animals = animals;
             });
     }

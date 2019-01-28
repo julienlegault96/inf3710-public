@@ -2,8 +2,24 @@
 <h1>
     Test liste fetch du server
 </h1>
-<ul>
-    <li *ngFor="let animal of animals">
-        {{ animal }}
-    </li>
-</ul>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Type</th>
+            <th scope="col">Description</th>
+            <th scope="col">Birthday</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let animal of animals">
+            <th scope="row">{{ animal.partialKey.number }}</th>
+            <td>{{ animal.name }}</td>
+            <td>{{ animal.type }}</td>
+            <td>{{ animal.description }}</td>
+            <td>{{ animal.birthday }}</td>
+        </tr>
+    </tbody>
+</table>

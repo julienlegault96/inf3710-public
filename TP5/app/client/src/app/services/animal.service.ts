@@ -3,11 +3,12 @@ import { Observable } from "rxjs";
 
 import { AbstractRequestService } from "@services/abstract/abstract-request.service";
 import { Endpoints } from "@common/endpoints";
+import { Animal } from "@common/animal";
 
 @Injectable()
 export class AnimalService extends AbstractRequestService {
 
-    public getAnimals(): Observable<Array<string>> {
+    public getAnimals(): Observable<Array<Animal>> {
         return this.getRequest(Endpoints.Animals);
     }
 

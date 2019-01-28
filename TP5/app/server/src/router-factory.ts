@@ -18,11 +18,22 @@ export class RouterFactory {
     public getRoutes(): Router {
         const router: Router = Router();
 
+        // Animals
         router.get(`/${Endpoints.Animals}`, (req: Request, res: Response, next: NextFunction) => {
             this.animalsRoute.getAnimals(req, res, next);
         });
 
-        // TODO
+        router.post(`/${Endpoints.Animals}`, (req: Request, res: Response, next: NextFunction) => {
+            this.animalsRoute.addAnimal(req, res, next);
+        });
+
+        router.put(`/${Endpoints.Animals}/:id`, (req: Request, res: Response, next: NextFunction) => {
+            this.animalsRoute.updateAnimal(req, res, next);
+        });
+
+        router.delete(`/${Endpoints.Animals}/:id`, (req: Request, res: Response, next: NextFunction) => {
+            this.animalsRoute.deleteAnimal(req, res, next);
+        });
 
         return router;
     }
