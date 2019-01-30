@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 
 import { AnimalService } from "@services/animal.service";
-import { Animal } from "@common/animal";
+import { Animal } from "@common/entities/animal";
 
 @Component({
     selector: "app-dashboard",
