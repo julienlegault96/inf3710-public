@@ -1,0 +1,58 @@
+Patient(patientNo, name, address, phoneNo, dob)
+Primary Key(patientNo)
+
+----------------
+
+Appointment(apptNo, patientNo, doctorId, date, time)
+Primary Key(apptNo)
+Foreign Key(patientNo) references Doctor(patientNo)
+Foreign Key(doctorId) references Doctor(doctorId)
+
+L'entité Appointment à besoin de la clé de l'entité Patient
+et de l'entité Doctor pour transformer l'association 1.* en 
+entité associative
+
+----------------
+
+Doctor(doctorId, name, dob, address, phoneNo, salary)
+Primary Key(doctorId)
+
+----------------
+
+Medical(doctorId, overtimeRate)
+Primary Key(doctorId)
+Foreign Key(doctorId) references Doctor(doctorId)
+
+L'entité Medical hérite des attributs de l'entité Doctor.
+C'est pour cela quelle a la clé étrangère doctorId.
+
+----------------
+
+Specialist(doctorId, fieldArea)
+Primary Key(doctorId)
+Foreign Key(doctorId) references Doctor(doctorId)
+
+L'entité Specialist hérite des attributs de l'entité Doctor.
+C'est pour cela quelle a la clé étrangère doctorId.
+
+----------------
+
+Bill(billNo, doctorId, total)
+Primary Key(billNo)
+Foreign Key(doctorId) references Doctor(doctorId)
+
+L'entité Payment à besoin de la clé de de l'entité 
+Doctor pour transformer l'association 1.* en 
+entité associative
+
+----------------
+
+Payment(paymentNo, patientNo, billNo, details, method)
+Primary Key(paymentNo)
+Foreign Key(patientNo) references Doctor(patientNo)
+Foreign Key(billNo) references Doctor(billNo)
+
+L'entité Payment à besoin de la clé de l'entité Bill et 
+de l'entité Patient pour transformer l'association 1.* en 
+entité associative
+
