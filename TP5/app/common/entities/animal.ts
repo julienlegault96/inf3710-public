@@ -1,7 +1,6 @@
 import { AbstractEntity } from "./abstract-entity";
 
 export interface Animal extends AbstractEntity {
-    // tslint:disable-next-line:no-any
     foreignKey: {
         clinicNumber: number;
     };
