@@ -19,6 +19,6 @@ CREATE TABLE IF NOT EXISTS public.Animal (
     FOREIGN KEY (clinicId) REFERENCES public.Clinic(id)
 )
 
-INSERT INTO public.clinic (address, phone, fax) VALUES ('2900 boulevard Edouard Montepetit', '514 123 1234', '514 123 1234');
+INSERT INTO public.clinic VALUES (DEFAULT, '2900 boulevard Edouard Montepetit', '514 123 1234', '514 123 1234');
 
-INSERT INTO public.Animal (clinicId, name, type, description ,birthday, registry, state) VALUES (1, 'Charlie', 'Chat', 'Gros', date '2015-08-13', current_date, 'en sante');
+INSERT INTO public.Animal VALUES (DEFAULT, 1, 'Charlie', 'Chat', 'Gros', date '2015-08-13', current_date, 'en sante');
