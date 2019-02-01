@@ -1,12 +1,8 @@
 import { AbstractEntity } from "./abstract-entity";
 
 export interface Animal extends AbstractEntity {
-    foreignKey: {
-        clinicNumber: number;
-    };
-    partialKey: {
-        number: number;
-    };
+    clinicId: number;
+    id: number;
     name: string;
     type: string;
     description: string;

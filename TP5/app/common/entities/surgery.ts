@@ -1,9 +1,7 @@
 import { AbstractEntity } from "./abstract-entity";
 
 export interface Surgery extends AbstractEntity {
-    primaryKey: {
-        number: number;
-    };
+    id: number;
     date: string;
     quantity: number;
     startDate: string;

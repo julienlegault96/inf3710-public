@@ -2,9 +2,7 @@ import { AbstractEntity } from "./abstract-entity";
 import { Address } from "./address";
 
 export interface Employee extends AbstractEntity {
-    primaryKey: {
-        number: number;
-    };
+    id: number;
     name: string;
     address: Address;
     telephone: string;

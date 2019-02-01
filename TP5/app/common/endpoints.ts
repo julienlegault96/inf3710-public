@@ -31,5 +31,5 @@ export enum Endpoints {
  *      PUT Animals/{id}
  * 2.   GET Animals/{id}
  * 3.   GET Animals/?filterName={name}
- * 4.   
+ * 4.
  */
