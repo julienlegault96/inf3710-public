@@ -17,7 +17,8 @@ export class AnimalService {
         return this.dbService.query({ text: "SELECT * FROM public.Animal"})
             .then((response) => {
                 return response.rows;
-            });
+            })
+            .catch();
         // return new Promise((resolve, reject) => {
         //     resolve([
         //         {
