@@ -1,6 +1,7 @@
 import { injectable, inject } from "inversify";
 import { Animal } from "../../../common/entities/animal";
 import { DBService } from "./db.service";
+import { QueryResult, QueryConfig } from "pg";
 
 @injectable()
 export class AnimalService {
@@ -14,35 +15,46 @@ export class AnimalService {
     }
 
     public getAnimals(): Promise<Array<Animal>> {
-        return this.dbService.query({ text: "SELECT * FROM public.Animal"})
-            .then((response) => {
+        const queryConfig: QueryConfig = {
+            text: "SELECT * FROM public.Animal"
+        };
+
+        return this.dbService.query(queryConfig)
+            .then((response: QueryResult) => {
                 return response.rows;
             })
-            .catch();
-        // return new Promise((resolve, reject) => {
-        //     resolve([
-        //         {
-        //             foreignKey: {
-        //                 clinicNumber: 1,
-        //             },
-        //             partialKey: {
-        //                 number: 1,
-        //             },
-        //             name: "Doggo",
-        //             type: "Pug",
-        //             description: "Small doggo",
-        //             birthday: "2010-08-04",
-        //             registryDay: "2012-06-16",
-        //             state: "Healthy",
-        //         },
-        //     ]);
-        // });
+            .catch((reason) => {
+                // tslint:disable-next-line:no-console
+                console.log(reason);
+
+                return [];
+            });
     }
 
     public addAnimal(animal: Animal): Promise<boolean> {
-        return new Promise((resolve, reject) => {
-            resolve(false);
-        });
+        const queryConfig: QueryConfig = {
+            text: "INSERT INTO public.Animal VALUES (DEFAULT, $1, $2, $3, $4, $5, $6, $7)",
+            values: [
+                animal.clinicId,
+                animal.name,
+                animal.type,
+                animal.description,
+                animal.birthday,
+                animal.registryDay,
+                animal.state
+            ],
+        };
+
+        return this.dbService.query(queryConfig)
+            .then((response: QueryResult) => {
+                return true;
+            })
+            .catch((reason) => {
+                // tslint:disable-next-line:no-console
+                console.log(reason);
+
+                return false;
+            });
     }
 
     public updateAnimal(id: string, animal: Animal): Promise<boolean> {

@@ -1,5 +1,5 @@
 // tslint:disable:no-any
 export interface AbstractEntity {
-    id: number;
+    id?: number;
     [key: string]: any;
 }
