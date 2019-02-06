@@ -9,18 +9,19 @@ import { RouterFactory } from "./router-factory";
 export class App {
 
     private expressApp: Express.Application;
-    private routes: RouterFactory;
+    private routerFactory: RouterFactory;
 
     public constructor(
         @inject(RouterFactory) routes: RouterFactory
     ) {
         this.expressApp = Express();
+        this.routerFactory = routes;
         this.config();
-        this.routes = routes;
     }
 
     public start(): void {
-        this.expressApp.use(this.routes.getRoutes());
+        const router: Express.Router = this.routerFactory.getRouter();
+        this.expressApp.use(router);
         this.expressApp.listen(ServerHost.Port);
     }
 

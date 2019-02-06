@@ -1,7 +1,7 @@
 import { AbstractEntity } from "./abstract-entity";
 
 export interface Treatment extends AbstractEntity {
-    id: number;
+    id?: number;
     description: string;
     cost: number;
 }

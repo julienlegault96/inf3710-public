@@ -1,12 +1,12 @@
 import { AbstractEntity } from "./abstract-entity";
 
 export interface Animal extends AbstractEntity {
-    clinicId: number;
     id?: number;
+    clinicId: number;
     name: string;
     type: string;
     description: string;
     birthday: string;
-    registryDay: string;
+    registry: string;
     state: string;
 }

@@ -1,7 +1,7 @@
 import { AbstractEntity } from "./abstract-entity";
 
 export interface Exam extends AbstractEntity {
-    id: number;
+    id?: number;
     date: string;
     hour: number;
     description: string;

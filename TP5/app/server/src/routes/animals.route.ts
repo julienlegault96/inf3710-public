@@ -17,20 +17,24 @@ export class AnimalsRoute {
         this.animalService = animalService;
     }
 
-    public async getAnimals(req: Request, res: Response, next: NextFunction): Promise<void> {
+    public async getAnimals(req: Request, res: Response): Promise<void> {
+        const filterName: string | undefined = req.query.filterName;
+        const animals: Array<Animal> = await this.animalService.getAnimals(filterName);
+
         res.status(StatusCodes.Ok)
-            .send(JSON.stringify(await this.animalService.getAnimals()));
+            .send(animals);
     }
 
-    public async addAnimal(req: Request, res: Response, next: NextFunction): Promise<void> {
+    public async addAnimal(req: Request, res: Response): Promise<void> {
         const animal: Animal = req.body;
+        const isAdded: boolean = await this.animalService.addAnimal(animal);
 
-        res.status(StatusCodes.Ok)
-            .send(JSON.stringify(await this.animalService.addAnimal(animal)));
+        res.status(isAdded ? StatusCodes.Ok : StatusCodes.BadRequest)
+            .send();
     }
 
-    public async updateAnimal(req: Request, res: Response, next: NextFunction): Promise<void> {
-        const id: string = req.params.id; // TODO verify id type
+    public async updateAnimal(req: Request, res: Response): Promise<void> {
+        const id: number = req.params.id;
         const animal: Animal = req.body;
         const isUpdated: boolean = await this.animalService.updateAnimal(id, animal);
 
@@ -38,8 +42,8 @@ export class AnimalsRoute {
             .send();
     }
 
-    public async deleteAnimal(req: Request, res: Response, next: NextFunction): Promise<void> {
-        const id: string = req.params.id;
+    public async deleteAnimal(req: Request, res: Response): Promise<void> {
+        const id: number = req.params.id;
         const isDeleted: boolean = await this.animalService.deleteAnimal(id);
 
         res.status(isDeleted ? StatusCodes.Ok : StatusCodes.BadRequest)
