@@ -1,0 +1,82 @@
+<h4>
+    <fa-icon [icon]="['fas', 'plus']" [fixedWidth]="true"></fa-icon>
+    Ajouter un animal
+</h4>
+<div class="card border-0 shadow">
+    <div class="card-body">
+        <form>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="clinic">
+                            <fa-icon [icon]="['fas', 'clinic-medical']" [fixedWidth]="true"></fa-icon>
+                            Clinique
+                        </label>
+                        <select class="form-control" id="clinic">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="type">
+                            <fa-icon [icon]="['fas', 'paw']" [fixedWidth]="true"></fa-icon>
+                            Type
+                        </label>
+                        <input type="text" class="form-control" id="type">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">
+                            <fa-icon [icon]="['fas', 'info']" [fixedWidth]="true"></fa-icon>
+                            Description
+                        </label>
+                        <textarea class="form-control" id="description" rows="5"></textarea>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="name">
+                            <fa-icon [icon]="['fas', 'signature']" [fixedWidth]="true"></fa-icon>
+                            Nom
+                        </label>
+                        <input type="text" class="form-control" id="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="birthday">
+                            <fa-icon [icon]="['fas', 'calendar-day']" [fixedWidth]="true"></fa-icon>
+                            Date de naissance
+                        </label>
+                        <input type="text" class="form-control" id="birthday" placeholder="AAAA/MM/JJ">
+                    </div>
+                    <div class="form-group">
+                        <label for="registry">
+                            <fa-icon [icon]="['fas', 'calendar-check']" [fixedWidth]="true"></fa-icon>
+                            Date d'inscription
+                        </label>
+                        <input type="text" class="form-control" id="registry" placeholder="AAAA/MM/JJ">
+                    </div>
+                    <div class="form-group">
+                        <label for="state">
+                            <fa-icon [icon]="['fas', 'heart']" [fixedWidth]="true"></fa-icon>
+                            État
+                        </label>
+                        <select class="form-control" id="state">
+                            <option>Vivant</option>
+                            <option>Décédé</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="float-right">
+                <button type="button" class="btn btn-success">
+                    Créer
+                    <fa-icon [icon]="['fas', 'plus']"></fa-icon>
+                </button>
+            </div>
+            <div class="clearfix"></div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+<h4>
+    <fa-icon [icon]="['fas', 'list-ul']" [fixedWidth]="true"></fa-icon>
+    Animaux
+</h4>
+<div class="bg-white shadow rounded">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">
+                    ID
+                </th>
+                <th scope="col">
+                    Nom
+                </th>
+                <th scope="col">
+                    Type
+                </th>
+                <th scope="col">
+                    Description
+                </th>
+                <th scope="col">
+                    Date de naissance
+                </th>
+                <th scope="col">
+                    Détails
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let animal of animals">
+                <th scope="row">
+                    {{ animal.id }}
+                </th>
+                <td>
+                    {{ animal.name }}
+                </td>
+                <td>
+                    {{ animal.type }}
+                </td>
+                <td>
+                    {{ animal.description }}
+                </td>
+                <td>
+                    {{ animal.birthday }}
+                </td>
+                <td width="1">
+                    <button type="button" class="btn btn-info">
+                        <fa-icon [icon]="['fas', 'ellipsis-h']"></fa-icon>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
