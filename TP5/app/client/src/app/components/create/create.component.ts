@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 
 import { AnimalService } from "@services/animal.service";
 
@@ -10,10 +10,45 @@ import { AnimalService } from "@services/animal.service";
 
 export class CreateComponent {
 
+    public clinicId: string;
+    public name: string;
+    public type: string;
+    public description: string;
+    public birthday: string;
+    public registry: string;
+    public state: string;
     private animalService: AnimalService;
 
     public constructor(animalService: AnimalService) {
         this.animalService = animalService;
+        this.clinicId = "";
+        this.name = "";
+        this.type = "";
+        this.description = "";
+        this.birthday = "";
+        this.registry = "";
+        this.state = "";
+    }
+
+    public submit(): void {
+        // TODO Implement this
+
+        // const hasBeenCreated: boolean = this.animalService.createAnimal(
+        //     this.clinicId,
+        //     this.name,
+        //     this.type,
+        //     this.description,
+        //     this.birthday,
+        //     this.registry,
+        //     this.state
+        // );
+
+        // if (!hasBeenCreated) {
+        //     this.displayInvalidInput();
+        // }
+        // else {
+        //     this.displayHasBeenCreated();
+        // }
     }
 
 }

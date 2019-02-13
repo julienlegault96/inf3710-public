@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import * as moment from "moment";
 
 import { AnimalService } from "@services/animal.service";
 import { Animal } from "@common/entities/animal";
@@ -24,6 +25,24 @@ export class TableComponent implements OnInit {
             .subscribe((animals: Array<Animal>) => {
                 this.animals = animals;
             });
+    }
+
+    public formatDate(date: string): string {
+        moment.locale("fr");
+
+        return moment(date).format("YYYY-MM-DD");
+    }
+
+    public show(): void {
+        // const myModal = document.getElementById("exampleModalLabel");
+        // myModal.modal("show");
+
+        // console.log(bs);
+
+        // const myModalInstance = new bsn.Modal(myModal);
+
+        // console.log(myModalInstance.show);
+        // myModalInstance.show();
     }
 
 }

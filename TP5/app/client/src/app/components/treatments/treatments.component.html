@@ -1,0 +1,32 @@
+<h4>
+    <fa-icon [icon]="['fas', 'syringe']" [fixedWidth]="true"></fa-icon>
+    Traitements
+</h4>
+<table class="table rounded shadow">
+    <thead>
+        <tr>
+            <th scope="col" class="border-top-0 text-right">
+                #
+            </th>
+            <th scope="col" class="border-top-0">
+                Description
+            </th>
+            <th scope="col" class="border-top-0">
+                Prix
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let treatment of treatments">
+            <th scope="row" width="1" class="text-right">
+                {{ treatment.id }}
+            </th>
+            <td>
+                {{ treatment.description }}
+            </td>
+            <td>
+                {{ treatment.price }}
+            </td>
+        </tr>
+    </tbody>
+</table>
