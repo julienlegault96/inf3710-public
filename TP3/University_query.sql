@@ -48,14 +48,10 @@ WHERE e.sid = i.sid AND
 c.cno = i.cno AND
 c.dep = 'Maths';
 --12) (1 point) Imprimer le nom des étudiants qui suivent un cours du département GIGL OU un cours du département de mathématiques
-SELECT snom FROM etudiant e, inscription i, cours c
-FULL JOIN (SELECT snom, etudiant.sid FROM etudiant, inscription i, cours c 
-WHERE etudiant.sid = i.sid AND
-c.cno = i.cno AND
-c.dep = 'Maths') B ON e.sid = b.sid
-WHERE e.sid = i.sid AND
-c.cno = i.cno AND
-c.dep = 'gigl';
+SELECT snom
+FROM etudiant e, inscription i, cours c 
+WHERE e.sid = i.sid AND i.cno = c.cno AND (c.dep = 'gigl' OR c.dep='Maths')
+GROUP BY snom;
 --13) (1 point) Quelle est la différence d'âge entre le plus vieux et le plus jeune étudiant ? Affichez le résultat dans une colonne nommée Difference
 SELECT MAX(age)-MIN(age) difference from Etudiant;
 --14) (1 point) Quel est le nombre d'étudiants dont la moyenne est supérieure à la moyenne de tous les étudiants ?
