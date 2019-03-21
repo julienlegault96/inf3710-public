@@ -1,9 +1,9 @@
 export enum Endpoints {
     Animals = "animals",
-    Clinics = "clinics",
-    Customers = "customers",
-    Employees = "employees",
-    Treatments = "treatments",
+    Cliniques = "cliniques",
+    Proprietaire = "proprietaires",
+    Employes = "employes",
+    Traitements = "traitements",
     AnimalsCount = "animals/count",
 }
 

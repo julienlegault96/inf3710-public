@@ -13,11 +13,9 @@
                         Clinique
                     </label>
                     <select class="form-control" id="clinic" [(ngModel)]="numclinique">
-                        <option value="1">Clinique 1</option>
-                        <option value="2">Clinique 2</option>
-                        <option value="3">Clinique 3</option>
-                        <option value="4">Clinique 4</option>
-                        <option value="5">Clinique 5</option>
+                        <option *ngFor="let clinique of cliniques" [value]="clinique.numclinique">
+                            {{clinique.rue}}
+                        </option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -48,16 +46,14 @@
                         <fa-icon [icon]="['fas', 'calendar-day']" [fixedWidth]="true"></fa-icon>
                         Date de naissance
                     </label>
-                    <input type="text" class="form-control" id="birthday" placeholder="AAAA-MM-JJ"
-                        [(ngModel)]="dob">
+                    <input type="text" class="form-control" id="birthday" placeholder="AAAA-MM-JJ" [(ngModel)]="dob">
                 </div>
                 <div class="form-group">
                     <label for="registry">
                         <fa-icon [icon]="['fas', 'calendar-check']" [fixedWidth]="true"></fa-icon>
                         Date d'inscription
                     </label>
-                    <input type="text" class="form-control" id="registry" placeholder="AAAA-MM-JJ"
-                        [(ngModel)]="doi">
+                    <input type="text" class="form-control" id="registry" placeholder="AAAA-MM-JJ" [(ngModel)]="doi">
                 </div>
                 <div class="form-group">
                     <label for="state">
@@ -65,15 +61,15 @@
                         État
                     </label>
                     <select class="form-control" id="state" [(ngModel)]="etat">
-                        <option>Vivant</option>
-                        <option>Décédé</option>
+                        <option value="vivant">Vivant</option>
+                        <option value="decede">Décédé</option>
                     </select>
                 </div>
             </div>
         </div>
 
         <div class="float-right">
-            <button type="button" class="btn btn-success">
+            <button type="button" class="btn btn-success" (click)="submit()">
                 Créer
                 <fa-icon [icon]="['fas', 'plus']"></fa-icon>
             </button>

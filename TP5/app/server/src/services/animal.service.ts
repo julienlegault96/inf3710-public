@@ -25,7 +25,6 @@ export class AnimalService {
 
         return this.dbService.query(queryConfig)
             .then((response: QueryResult) => {
-                console.log(response.rows);
                 return response.rows;
             })
             .catch((reason) => {

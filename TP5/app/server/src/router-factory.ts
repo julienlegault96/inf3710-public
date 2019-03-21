@@ -3,16 +3,20 @@ import { Router, Request, Response } from "express";
 
 import { AnimalsRoute } from "./routes/animals.route";
 import { Endpoints } from "../../common/endpoints";
+import { CliniquesRoute } from "./routes/cliniques.route";
 
 @injectable()
 export class RouterFactory {
 
     private animalsRoute: AnimalsRoute;
+    private cliniquesRoute: CliniquesRoute;
 
     public constructor(
-        @inject(AnimalsRoute) animalsRoute: AnimalsRoute
+        @inject(AnimalsRoute) animalsRoute: AnimalsRoute,
+        @inject(CliniquesRoute) cliniquesRoute: CliniquesRoute
     ) {
         this.animalsRoute = animalsRoute;
+        this.cliniquesRoute = cliniquesRoute;
     }
 
     public getRouter(): Router {
@@ -60,6 +64,10 @@ export class RouterFactory {
         router.delete(`/${Endpoints.Animals}/:id`, (req: Request, res: Response) => {
             this.animalsRoute.deleteAnimal(req, res);
         });
+
+        router.get(`/${Endpoints.Cliniques}`, (req: Request, res: Response) => {
+            this.cliniquesRoute.getCliniques(req, res);
+        })
 
         return router;
     }

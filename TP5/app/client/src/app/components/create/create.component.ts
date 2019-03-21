@@ -1,6 +1,8 @@
 import { Component } from "@angular/core";
 
 import { AnimalService } from "@services/animal.service";
+import { CliniqueService } from "@services/clinique.service";
+import { Clinique } from "@common/entities/clinique";
 
 @Component({
     selector: "app-create",
@@ -9,7 +11,8 @@ import { AnimalService } from "@services/animal.service";
 })
 
 export class CreateComponent {
-    
+
+    public cliniques: Array<Clinique>;
     public numclinique: string;
     public nom: string;
     public type: string;
@@ -17,9 +20,12 @@ export class CreateComponent {
     public dob: string;
     public doi: string;
     public etat: string;
+
+    private cliniqueService: CliniqueService;
     private animalService: AnimalService;
 
-    public constructor(animalService: AnimalService) {
+    public constructor(cliniqueService: CliniqueService, animalService: AnimalService) {
+        this.cliniqueService = cliniqueService;
         this.animalService = animalService;
         this.numclinique = "";
         this.nom = "";
@@ -28,27 +34,45 @@ export class CreateComponent {
         this.dob = "";
         this.doi = "";
         this.etat = "";
+
+        this.getValidClinique();
     }
 
     public submit(): void {
+        console.log(
+            this.numclinique,
+            this.nom,
+            this.type,
+            this.description,
+            this.dob,
+            this.doi,
+            this.etat
+        );
         // TODO Implement this
 
-        // const hasBeenCreated: boolean = this.animalService.createAnimal(
-        //     this.clinicId,
-        //     this.name,
+        // const hasBeenAdded: boolean = this.animalService.addAnimal(
+        //     this.numclinique,
+        //     this.nom,
         //     this.type,
         //     this.description,
-        //     this.birthday,
-        //     this.registry,
-        //     this.state
+        //     this.dob,
+        //     this.doi,
+        //     this.etat
         // );
 
-        // if (!hasBeenCreated) {
+        // if (!hasBeenAdded) {
         //     this.displayInvalidInput();
         // }
         // else {
-        //     this.displayHasBeenCreated();
+        //     this.displayHasBeenAdded();
         // }
+    }
+
+    private getValidClinique(): void {
+        this.cliniqueService.getCliniques()
+            .subscribe((cliniques: Array<Clinique>) => {
+                this.cliniques = cliniques;
+            });
     }
 
 }

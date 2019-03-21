@@ -21,6 +21,7 @@ import { CreateComponent } from "@components/create/create.component";
 import { DetailsComponent } from "@components/details/details.component";
 import { EditComponent } from "@components/edit/edit.component";
 import { TreatmentsComponent } from "@components/treatments/treatments.component";
+import { CliniqueService } from "@services/clinique.service";
 
 @NgModule({
     declarations: [
@@ -42,6 +43,7 @@ import { TreatmentsComponent } from "@components/treatments/treatments.component
     ],
     providers: [
         AnimalService,
+        CliniqueService,
         TreatmentsService,
     ],
     bootstrap: [
