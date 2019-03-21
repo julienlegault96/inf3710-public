@@ -3,6 +3,7 @@ import { Component } from "@angular/core";
 import { AnimalService } from "@services/animal.service";
 import { CliniqueService } from "@services/clinique.service";
 import { Clinique } from "@common/entities/clinique";
+import { Animal } from "@common/entities/animal";
 
 @Component({
     selector: "app-create",
@@ -13,7 +14,8 @@ import { Clinique } from "@common/entities/clinique";
 export class CreateComponent {
 
     public cliniques: Array<Clinique>;
-    public numclinique: string;
+    public numclinique: number;
+    public numproprietaire: number;
     public nom: string;
     public type: string;
     public description: string;
@@ -27,7 +29,8 @@ export class CreateComponent {
     public constructor(cliniqueService: CliniqueService, animalService: AnimalService) {
         this.cliniqueService = cliniqueService;
         this.animalService = animalService;
-        this.numclinique = "";
+        this.numclinique = 0;
+        this.numproprietaire = 1;
         this.nom = "";
         this.type = "";
         this.description = "";
@@ -39,33 +42,31 @@ export class CreateComponent {
     }
 
     public submit(): void {
-        console.log(
-            this.numclinique,
-            this.nom,
-            this.type,
-            this.description,
-            this.dob,
-            this.doi,
-            this.etat
-        );
-        // TODO Implement this
-
-        // const hasBeenAdded: boolean = this.animalService.addAnimal(
-        //     this.numclinique,
-        //     this.nom,
-        //     this.type,
-        //     this.description,
-        //     this.dob,
-        //     this.doi,
-        //     this.etat
-        // );
-
-        // if (!hasBeenAdded) {
+        if (!this.numclinique || !this.numproprietaire || !this.nom || !this.type || !this.description || !this.dob || !this.doi || !this.etat) {
         //     this.displayInvalidInput();
-        // }
-        // else {
-        //     this.displayHasBeenAdded();
-        // }
+            return;
+        }
+
+        if (this.etat !== "vivant" && this.etat !== "decede") {
+        //     this.displayInvalidInput();
+            return;
+        }
+    
+        const animal: Animal = {
+            numclinique: this.numclinique,
+            numproprietaire: this.numproprietaire,
+            nom: this.nom,
+            type: this.type,
+            description: this.description,
+            dob: this.dob,
+            doi: this.doi,
+            etat: this.etat
+        };
+
+        this.animalService.addAnimal(animal)
+            .subscribe(() => {
+                console.log("succ");
+            });
     }
 
     private getValidClinique(): void {

@@ -12,4 +12,8 @@ export class AnimalService extends AbstractRequestService {
         return this.getRequest(Endpoints.Animals);
     }
 
+    public addAnimal(animal: Animal): Observable<void> {
+        return this.postRequest(Endpoints.Animals, animal);
+    }
+
 }

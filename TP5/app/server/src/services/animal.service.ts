@@ -39,7 +39,6 @@ export class AnimalService {
             text: "INSERT INTO public.Animal VALUES (DEFAULT, $1, $2, $3, $4, $5, $6, $7)",
             values: [
                 animal.numproprietaire,
-                animal.numclinique,
                 animal.nom,
                 animal.type,
                 animal.description,

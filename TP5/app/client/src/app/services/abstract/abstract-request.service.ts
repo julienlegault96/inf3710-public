@@ -23,12 +23,12 @@ export abstract class AbstractRequestService {
         );
     }
 
-    protected postRequest<T>(serverEndpoint: Endpoints, body: T): Observable<T> {
+    protected postRequest<T>(serverEndpoint: Endpoints, body: T): Observable<void> {
         const options: {} = {
             headers: new HttpHeaders({ "Content-Type": "application/json" }),
         };
 
-        return this.http.post<T>(this.getUrl(serverEndpoint), body, options).pipe(
+        return this.http.post<void>(this.getUrl(serverEndpoint), body, options).pipe(
             tap(),
             catchError(this.handleError)
         );
