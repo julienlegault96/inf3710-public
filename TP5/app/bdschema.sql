@@ -53,6 +53,7 @@ CREATE TABLE IF NOT EXISTS EnregistrementProprioClinique (
 
 CREATE TABLE IF NOT EXISTS Animal(
 	numAnimal SERIAL,
+	numProprietaire SERIAL,
 	nom VARCHAR(25) NOT NULL,
 	type VARCHAR(25) NOT NULL,
 	description VARCHAR(140) NOT NULL,
@@ -60,7 +61,8 @@ CREATE TABLE IF NOT EXISTS Animal(
 	doi DATE NOT NULL,
 	etat VARCHAR(25) NOT NULL,
 	check((etat = 'vivant') OR (etat ='decede')),
-	PRIMARY KEY(numAnimal)
+	PRIMARY KEY(numAnimal, numProprietaire),
+	FOREIGN KEY(numProprietaire) references Proprietaire(numProprietaire)
 );
 
 CREATE TABLE IF NOT EXISTS EnregistrementAnimalClinique(
