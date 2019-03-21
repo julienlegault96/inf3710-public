@@ -25,6 +25,7 @@ export class AnimalService {
 
         return this.dbService.query(queryConfig)
             .then((response: QueryResult) => {
+                console.log(response.rows);
                 return response.rows;
             })
             .catch((reason) => {
@@ -38,13 +39,14 @@ export class AnimalService {
         const queryConfig: QueryConfig = {
             text: "INSERT INTO public.Animal VALUES (DEFAULT, $1, $2, $3, $4, $5, $6, $7)",
             values: [
-                animal.clinicId,
-                animal.name,
+                animal.numproprietaire,
+                animal.numclinique,
+                animal.nom,
                 animal.type,
                 animal.description,
-                animal.birthday,
-                animal.registry,
-                animal.state
+                animal.dob,
+                animal.doi,
+                animal.etat
             ],
         };
 
@@ -62,17 +64,17 @@ export class AnimalService {
     public updateAnimal(id: number, animal: Animal): Promise<boolean> {
         const queryConfig: QueryConfig = {
             text:
-                // tslint:disable-next-line:max-line-length
-                "UPDATE public.Animal SET clinicId = $2, name = $3, type = $4, description = $5, birthday = $6, registry = $7, state = $8 WHERE id = $1",
+                "UPDATE public.Animal SET numProprietaire = $2, numClinique = $3, nom = $4, type = $5, description = $6, dob = $7, doi = $8, etat = $9 WHERE numAnimal = $1",
             values: [
                 id,
-                animal.clinicId,
-                animal.name,
+                animal.numproprietaire,
+                animal.numclinique,
+                animal.nom,
                 animal.type,
                 animal.description,
-                animal.birthday,
-                animal.registry,
-                animal.state
+                animal.dob,
+                animal.doi,
+                animal.etat
             ],
         };
 
@@ -87,11 +89,11 @@ export class AnimalService {
             });
     }
 
-    public deleteAnimal(id: number): Promise<boolean> {
+    public deleteAnimal(numanimal: number): Promise<boolean> {
         const queryConfig: QueryConfig = {
-            text: "DELETE FROM public.Animal WHERE id = $1",
+            text: "DELETE FROM public.Animal WHERE numAnimal = $1",
             values: [
-                id
+                numanimal
             ],
         };
 

@@ -1,17 +1,17 @@
 import { Observable, of } from "rxjs";
-import { Treatment } from "@common/entities/treatment";
+import { Traitement } from "@common/entities/traitement";
 
 export class TreatmentsService {
 
-    public getTreatments(id: number): Observable<Array<Treatment>> {
+    public getTreatments(id: number): Observable<Array<Traitement>> {
         return of([
             {
                 description: "aaa",
-                cost: 200
+                cout: 200
             },
             {
                 description: "bbb",
-                cost: 333
+                cout: 333
             }
         ]);
     }

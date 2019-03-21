@@ -1,12 +1,11 @@
-import { AbstractEntity } from "./abstract-entity";
-
-export interface Animal extends AbstractEntity {
-    id?: number;
-    clinicId: number;
-    name: string;
+export interface Animal {
+    numanimal?: number;
+    numproprietaire: number;
+    numclinique: number;
+    nom: string;
     type: string;
     description: string;
-    birthday: string;
-    registry: string;
-    state: string;
+    dob: string;
+    doi: string;
+    etat: "vivant" | "decede";
 }

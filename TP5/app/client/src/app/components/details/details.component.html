@@ -1,17 +1,17 @@
 <div class="text-center">
-    <button type="button" data-toggle="modal" [attr.data-target]="'#detailsModal' + animal.id" class="btn btn-info">
+    <button type="button" data-toggle="modal" [attr.data-target]="'#detailsModal' + animal.numanimal" class="btn btn-info">
         <fa-icon [icon]="['fas', 'ellipsis-h']"></fa-icon>
     </button>
 </div>
 
-<div class="modal fade" [id]="'detailsModal' + animal.id">
+<div class="modal fade" [id]="'detailsModal' + animal.numanimal">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-body">
                 <div class="float-left">
                     <h4 class="modal-title">
                         <fa-icon [icon]="['fas', 'laptop-medical']"></fa-icon>
-                        {{ animal.name }}
+                        {{ animal.nom }}
                     </h4>
                 </div>
                 <div class="float-right">

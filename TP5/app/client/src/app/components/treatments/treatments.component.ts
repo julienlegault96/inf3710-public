@@ -2,7 +2,7 @@ import { Component, Input } from "@angular/core";
 
 import { Animal } from "@common/entities/animal";
 import { TreatmentsService } from "@services/treatments.service";
-import { Treatment } from "@common/entities/treatment";
+import { Traitement } from "@common/entities/traitement";
 
 @Component({
     selector: "app-treatments",
@@ -13,7 +13,7 @@ import { Treatment } from "@common/entities/treatment";
 export class TreatmentsComponent {
 
     @Input() public animal: Animal;
-    public treatments: Array<Treatment>;
+    public treatments: Array<Traitement>;
     private treatmentsService: TreatmentsService;
 
     public constructor(treatmentsService: TreatmentsService) {
@@ -22,9 +22,9 @@ export class TreatmentsComponent {
     }
 
     public ngOnInit(): void {
-        if (this.animal.id) {
-            this.treatmentsService.getTreatments(this.animal.id)
-                .subscribe((treatments: Array<Treatment>) => {
+        if (this.animal.numanimal) {
+            this.treatmentsService.getTreatments(this.animal.numanimal)
+                .subscribe((treatments: Array<Traitement>) => {
                     this.treatments = treatments;
                 });
         }

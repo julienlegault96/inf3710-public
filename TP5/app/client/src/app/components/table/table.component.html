@@ -32,10 +32,10 @@
                 <tbody>
                     <tr *ngFor="let animal of animals">
                         <th scope="row" width="1" class="text-right">
-                            {{ animal.id }}
+                            {{ animal.numanimal }}
                         </th>
                         <td>
-                            {{ animal.name }}
+                            {{ animal.nom }}
                         </td>
                         <td>
                             {{ animal.type }}
@@ -44,7 +44,7 @@
                             {{ animal.description }}
                         </td>
                         <td>
-                            {{ formatDate(animal.birthday) }}
+                            {{ formatDate(animal.dob) }}
                         </td>
                         <td width="1">
                             <app-details [animal]="animal"></app-details>
