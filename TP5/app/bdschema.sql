@@ -31,6 +31,26 @@ CREATE TABLE IF NOT EXISTS Clinique(
 	FOREIGN KEY (numEmploye) references Employe(numEmploye)
 );
 
+CREATE TABLE IF NOT EXISTS Proprietaire (
+	numProprietaire SERIAL,
+	nom VARCHAR(25) NOT NULL,
+	prenom VARCHAR(25) NOT NULL,
+	rue VARCHAR(50) NOT NULL,
+	ville VARCHAR(25) NOT NULL,
+	province VARCHAR(25) NOT NULL,
+	codePostal VARCHAR(25) NOT NULL,
+	telephone VARCHAR(10) NOT NULL,
+	PRIMARY KEY (numProprietaire)
+);
+
+CREATE TABLE IF NOT EXISTS EnregistrementProprioClinique (
+	numProprietaire SERIAL,
+	numClinique SERIAL,
+	PRIMARY KEY (numProprietaire, numClinique),
+	FOREIGN KEY (numProprietaire) REFERENCES Proprietaire(numProprietaire),
+	FOREIGN KEY (numClinique) REFERENCES Clinique(numClinique)
+);
+
 CREATE TABLE IF NOT EXISTS Animal(
 	numAnimal SERIAL,
 	nom VARCHAR(25) NOT NULL,
@@ -51,9 +71,36 @@ CREATE TABLE IF NOT EXISTS EnregistrementAnimalClinique(
 	FOREIGN KEY (numClinique) references Clinique
 );
 
+CREATE TABLE IF NOT EXISTS Examen (
+	numExamen SERIAL,
+	numClinique SERIAL,
+	numEmploye SERIAL,
+	numAnimal SERIAL,
+	date DATE NOT NULL,
+	heure TIME NOT NULL,
+	description VARCHAR(140),
+	PRIMARY KEY (numExamen, numClinique),
+	FOREIGN KEY (numClinique) REFERENCES Clinique(numClinique),
+	FOREIGN KEY (numEmploye) REFERENCES Employe(numEmploye),
+	FOREIGN KEY (numAnimal) REFERENCES Animal(numAnimal)
+);
+
 CREATE TABLE IF NOT EXISTS Traitement(
 	numTraitement SERIAL,
 	description VARCHAR(140) NOT NULL,
 	cout INTEGER NOT NULL,
 	PRIMARY KEY(numTraitement)
+);
+
+CREATE TABLE IF NOT EXISTS Operation (
+	numTraitement SERIAL,
+	numExamen SERIAL,
+	numClinique SERIAL,
+	date DATE NOT NULL,
+	quantite INTEGER NOT NULL,
+	dateDebut DATE NOT NULL,
+	dateFin DATE NOT NULL,
+	PRIMARY KEY (numTraitement, numExamen, numClinique),
+	FOREIGN KEY (numTraitement) REFERENCES Traitement(numTraitement),
+	FOREIGN KEY (numExamen, numClinique) REFERENCES Examen(numExamen, numClinique)
 );
