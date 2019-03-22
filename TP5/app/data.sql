@@ -58,6 +58,7 @@ insert into Examen VALUES(default, 1, 4, 1, '2019-06-06', '15:30:00', 'Examen ro
 insert into Examen VALUES(default, 2, 8, 3, '2019-05-30', '10:45:00', 'Examen mensuel' );
 insert into Examen VALUES(default, 1, 4, 1, '2019-10-10', '16:30:00', 'Examen routinier mois Octobre' );
 insert into Examen VALUES(default, 1, 4, 1, '2020-01-10', '14:00:00', 'Examen routinier mois Janvier' );
+
 --Traitement
 insert into Traitement VALUES(default, 'Traitement a la Penicilline', 50.00 ); 
 insert into Traitement VALUES(default, 'Vaccination contre la grippe', 70.00 );
