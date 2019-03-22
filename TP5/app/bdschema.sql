@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS Examen (
 CREATE TABLE IF NOT EXISTS Traitement(
 	numTraitement SERIAL,
 	description VARCHAR(140) NOT NULL,
-	cout INTEGER NOT NULL,
+	cout numeric(7,2) NOT NULL,
 	PRIMARY KEY(numTraitement)
 );
 
@@ -100,8 +100,8 @@ CREATE TABLE IF NOT EXISTS Operation (
 	numClinique SERIAL,
 	date DATE NOT NULL,
 	quantite INTEGER NOT NULL,
-	dateDebut DATE NOT NULL,
-	dateFin DATE NOT NULL,
+	dateDebut TIME NOT NULL,
+	dateFin TIME NOT NULL,
 	PRIMARY KEY (numTraitement, numExamen, numClinique),
 	FOREIGN KEY (numTraitement) REFERENCES Traitement(numTraitement),
 	FOREIGN KEY (numExamen, numClinique) REFERENCES Examen(numExamen, numClinique)
