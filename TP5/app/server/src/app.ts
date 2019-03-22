@@ -1,39 +1,50 @@
 import { injectable, inject } from "inversify";
 import * as Express from "express";
+import * as cors from "cors";
 import * as bodyParser from "body-parser";
+import * as morgan from "morgan";
 
 import { ServerHost } from "../../common/hosts/server-host";
-import { RouterFactory } from "./router-factory";
+import { AnimalsRoute } from "./routes/animals.route";
+import { CliniquesRoute } from "./routes/cliniques.route";
+import { ProprietairesRoute } from "./routes/proprietaires.route";
 
 @injectable()
 export class App {
 
+    private animalsRoute: AnimalsRoute;
+    private cliniquesRoute: CliniquesRoute;
+    private proprietaireRoute: ProprietairesRoute;
     private expressApp: Express.Application;
-    private routerFactory: RouterFactory;
 
     public constructor(
-        @inject(RouterFactory) routes: RouterFactory
+        @inject(AnimalsRoute) animalsRoute: AnimalsRoute,
+        @inject(CliniquesRoute) cliniquesRoute: CliniquesRoute,
+        @inject(ProprietairesRoute) proprietairesRoute: ProprietairesRoute,
     ) {
+        this.animalsRoute = animalsRoute;
+        this.cliniquesRoute = cliniquesRoute;
+        this.proprietaireRoute = proprietairesRoute;
         this.expressApp = Express();
-        this.routerFactory = routes;
         this.config();
     }
 
     public start(): void {
-        const router: Express.Router = this.routerFactory.getRouter();
-        this.expressApp.use(router);
+        this.expressApp
+            .use(this.animalsRoute.get())
+            .use(this.cliniquesRoute.get())
+            .use(this.proprietaireRoute.get());
+
+        console.log(`Listening on port ${ServerHost.Port}`);
         this.expressApp.listen(ServerHost.Port);
     }
 
     private config(): void {
         this.expressApp
+            .use(cors())
             .use(bodyParser.json({ limit: "10000kb" }))
             .use(bodyParser.urlencoded({ extended: true }))
-            .use((req: Express.Request, res: Express.Response, next: Express.NextFunction) => {
-                res.setHeader("Access-Control-Allow-Origin", "*");
-
-                next();
-            });
+            .use(morgan("dev"))
     }
 
 }
