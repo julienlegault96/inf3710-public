@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS Employe(
 	numEmploye SERIAL,
 	nom VARCHAR(25) NOT NULL,
-	premon VARCHAR(25) NOT NULL,
+	prenom VARCHAR(25) NOT NULL,
 	rue VARCHAR (50) NOT NULL,
 	ville VARCHAR(25) NOT NULL,
 	province VARCHAR(25) NOT NULL,
@@ -68,9 +68,10 @@ CREATE TABLE IF NOT EXISTS Animal(
 CREATE TABLE IF NOT EXISTS EnregistrementAnimalClinique(
 	numAnimal SERIAL,
 	numClinique SERIAL,
-	PRIMARY KEY(numAnimal, numClinique),
-	FOREIGN KEY (numAnimal) references Animal,
-	FOREIGN KEY (numClinique) references Clinique
+	numProprietaire SERIAL,
+	PRIMARY KEY(numAnimal, numClinique, numProprietaire),
+	FOREIGN KEY (numAnimal, numProprietaire) references Animal(numAnimal, numProprietaire),
+	FOREIGN KEY (numClinique) references Clinique(numClinique)
 );
 
 CREATE TABLE IF NOT EXISTS Examen (
@@ -78,13 +79,14 @@ CREATE TABLE IF NOT EXISTS Examen (
 	numClinique SERIAL,
 	numEmploye SERIAL,
 	numAnimal SERIAL,
+	numProprietaire SERIAL,
 	date DATE NOT NULL,
 	heure TIME NOT NULL,
 	description VARCHAR(140),
 	PRIMARY KEY (numExamen, numClinique),
 	FOREIGN KEY (numClinique) REFERENCES Clinique(numClinique),
 	FOREIGN KEY (numEmploye) REFERENCES Employe(numEmploye),
-	FOREIGN KEY (numAnimal) REFERENCES Animal(numAnimal)
+	FOREIGN KEY (numAnimal, numProprietaire) REFERENCES Animal(numAnimal, numProprietaire)
 );
 
 CREATE TABLE IF NOT EXISTS Traitement(
