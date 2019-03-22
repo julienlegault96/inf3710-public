@@ -21,16 +21,24 @@ export class TableComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        this.animalService.getAnimals()
-            .subscribe((animals: Array<Animal>) => {
-                this.animals = animals;
-            });
+        this.updateAnimals();
     }
 
     public formatDate(date: string): string {
         moment.locale("fr");
 
         return moment(date).format("YYYY-MM-DD");
+    }
+
+    private filterAnimals(event: Event): void {
+        this.updateAnimals((event.target as HTMLInputElement).value);
+    }
+
+    private updateAnimals(filterName?: string): void {
+        this.animalService.getAnimals(filterName)
+            .subscribe((animals: Array<Animal>) => {
+                this.animals = animals;
+            });
     }
 
     public show(): void {

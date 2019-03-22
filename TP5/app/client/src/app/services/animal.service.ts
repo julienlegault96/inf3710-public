@@ -8,7 +8,11 @@ import { Animal } from "@common/entities/animal";
 @Injectable()
 export class AnimalService extends AbstractRequestService {
 
-    public getAnimals(): Observable<Array<Animal>> {
+    public getAnimals(filterName?: string): Observable<Array<Animal>> {
+        if (filterName) {
+            return this.getRequest(Endpoints.Animals, undefined, {tag: "filterName", value: filterName});
+        }
+
         return this.getRequest(Endpoints.Animals);
     }
 
