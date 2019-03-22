@@ -1,4 +1,4 @@
---Emplpoye
+--Employe
 insert into Employe VALUES (DEFAULT, 'Guay-Tanguay', 'Gaetan', '1265 1er avenue', 'Montreal', 'Quebec', 'ABC 123', '514123456', '1969-01-01', 'M', '123456789' , 'gestionnaire', 100000  );
 insert into Employe VALUES (DEFAULT, 'Tremblay', 'Jeanne', '20 cote des neiges', 'Montreal', 'Quebec', 'H2H 1C9', '514987654', '1980-03-03', 'F', '987654321' , 'secretaire', 50000  );
 insert into Employe VALUES (DEFAULT, 'Leblanc', 'Marc', '150 3e avenue', 'Montreal', 'Quebec', 'H5H 1D3', '514567379', '1975-02-07', 'M', '134786903' , 'entretien', 40000  );
@@ -41,6 +41,8 @@ insert into Animal VALUES(default, 3, 'Alian2', 'Chat', 'Chat energetique', ' 20
 insert into Animal VALUES(default, 4, 'Tigrou', 'Chien', 'Chien girs', ' 2016-03-24', '2018-04-30', 'vivant' ); 
 insert into Animal VALUES(default, 4, 'Phoenix', 'Oiseau', 'Oiseau en pleine sante', ' 2018-03-24', '2018-04-10', 'vivant' ); 
 insert into Animal VALUES(default, 3, 'Fido', 'Chien', 'Chien energetique', ' 2019-01-21', '2019-01-22', 'vivant' ); 
+insert into Animal VALUES(default, 3, 'Fidoe', 'Chien', 'Chienne energetique', ' 2019-01-21', '2019-01-22', 'vivant' ); 
+insert into Animal VALUES(default, 3, 'Fifa', 'Chat', 'Chat fan de soccer', ' 2019-01-21', '2019-01-22', 'vivant' ); 
 
 --EnregistrementAnimalClinique
 --insert into EnregistrementAnimalClinique VALUES(numAnimal, numClinique, numProprietaire);
@@ -53,7 +55,8 @@ insert into EnregistrementAnimalClinique VALUES(5, 1, 3);
 insert into EnregistrementAnimalClinique VALUES(5, 2, 3);
 insert into EnregistrementAnimalClinique VALUES(6, 1, 4);
 insert into EnregistrementAnimalClinique VALUES(7, 1, 4);
-insert into EnregistrementAnimalClinique VALUES(8, 1, 3) ;
+insert into EnregistrementAnimalClinique VALUES(9, 1, 3) ;
+insert into EnregistrementAnimalClinique VALUES(10, 1, 3) ;
 
 --Examen
 --insert into Examen VALUES(numexamen, numClinique, numemploye, numAnimal, numProprio....);
@@ -61,6 +64,9 @@ insert into Examen VALUES(default, 1, 4, 1, 1, '2019-06-06', '15:30:00', 'Examen
 insert into Examen VALUES(default, 2, 8, 3, 2, '2019-05-30', '10:45:00', 'Examen mensuel' );
 insert into Examen VALUES(default, 1, 4, 1, 1, '2019-10-10', '16:30:00', 'Examen routinier mois Octobre' );
 insert into Examen VALUES(default, 1, 4, 1, 1, '2020-01-10', '14:00:00', 'Examen routinier mois Janvier' );
+insert into Examen VALUES(default, 1, 4, 10, 3, '2019-01-10', '19:00:00', 'Examen du a une grippe' );
+insert into Examen VALUES(default, 1, 4, 9, 3, '2019-01-10', '19:00:00', 'Examen du a une grippe' );
+
 
 --Traitement
 insert into Traitement VALUES(default, 'Traitement a la Penicilline', 50.00 ); 
@@ -71,7 +77,10 @@ insert into Traitement VALUES(default, 'Vaccination contre la rage ', 1000.00 );
 insert into Traitement VALUES(default, 'Examen', 20.00);
 
 --Operation
+--insert into Operation VALUES(numTraitement, numExamen, numCinique, '2019-06-09', dose, '15:30:00', '16:00:00'  );
 insert into Operation VALUES(1, 1, 1, '2019-06-09', 2, '15:30:00', '16:00:00'  );
 insert into Operation VALUES(2, 2, 2, '2019-06-01', 1, '9:30:00', '10:30:00'  );
+insert into Operation VALUES(2, 5, 1, '2019-03-01', 1, '9:30:00', '10:30:00'  );
+insert into Operation VALUES(2, 6, 1, '2019-03-01', 1, '9:30:00', '10:30:00'  );
 
 

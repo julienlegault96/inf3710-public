@@ -34,11 +34,43 @@ a.numAnimal = e.numAnimal GROUP BY e.numClinique;
 --8) Lister le coût minimum, maximum et moyen des traitements
 SELECT min(cout), max(cout), avg(cout) FROM Traitement; 
 --9) Quels sont les noms des employés de plus de 50 ans ordonnés par nom ?
+SELECT nom, prenom FROM Employe WHERE DATE_PART('year', current_date) -
+DATE_PART('year', dob) > 50 ORDER BY nom;
 --10) Quels sont les propriétaires dont le nom contient « blay » ?
+SELECT * FROM Proprietaire WHERE
+nom LIKE '%blay%';
 --11) Supprimez le vétérinaire « Jean Tremblay »
---12) Lister les détails des propriétaires qui ont un chat et un chien
+DELETE FROM Employe WHERE nom = 'Tremblay' AND prenom = 'Jean' AND fonction = 'veterinaire';
+SELECT p.numProprietaire, p.nom, p.prenom, p.rue, p.ville, p.province, 
+p.codePostal, p.telephone FROM Proprietaire p, Animal a WHERE
+a.type = 'Chat' AND 
+a.numProprietaire = p.numProprietaire INTERSECT
+SELECT p.numProprietaire, p.nom, p.prenom, p.rue, p.ville, p.province, 
+p.codePostal, p.telephone FROM Proprietaire p, Animal a WHERE
+a.type = 'Chien' AND 
+a.numProprietaire = p.numProprietaire;
 --13) Lister les détails des propriétaires qui ont un chat ou un chien
+SELECT p.numProprietaire, p.nom, p.prenom, p.rue, p.ville, p.province, 
+p.codePostal, p.telephone FROM Proprietaire p, Animal a WHERE
+a.type = 'Chat' AND 
+a.numProprietaire = p.numProprietaire UNION
+SELECT p.numProprietaire, p.nom, p.prenom, p.rue, p.ville, p.province, 
+p.codePostal, p.telephone FROM Proprietaire p, Animal a WHERE
+a.type = 'Chien' AND 
+a.numProprietaire = p.numProprietaire;
 --14) Lister les détails des propriétaires qui ont un chat mais pas de chien vacciné contre la
 --grippe (la condition vacciné contre la grippe ne s’applique qu’aux chiens)
+-- SELECT p.numProprietaire, p.nom, p.prenom, p.rue, p.ville, p.province, 
+-- p.codePostal, p.telephone FROM Proprietaire p, Animal a WHERE
+-- a.type = 'Chat' AND 
+-- a.numProprietaire = p.numProprietaire EXCEPT
+-- SELECT p.numProprietaire, p.nom, p.prenom, p.rue, p.ville, p.province, 
+-- p.codePostal, p.telephone FROM Proprietaire p, Animal a, Traitement t, Operation o, Examen e 
+-- WHERE
+-- a.type = 'Chien' AND 
+-- a.numAnimal = e.numAnimal AND
+-- o.numExamen = e.numExamen AND
+-- o.numTraitement = '2' AND
+-- a.numProprietaire = p.numProprietaire ;
 --15) Lister tous les animaux d’une clinique donnée avec leurs traitements s’ils existent. Dans le
 --cas contraire, affichez null.
