@@ -21,9 +21,22 @@ export class ProprietairesRoute {
     public get(): Router {
         const router: Router = Router();
 
-        // router.get(`/${Endpoints.Cliniques}`, this.getCliniques.bind(this))
+        router.get(`/${Endpoints.Proprietaire}`, this.getProprietaires.bind(this))
 
         return router;
+    }
+
+    private async getProprietaires(req: Request, res: Response): Promise<void> {
+        if (!req.query.numClinique) {
+            res.status(StatusCodes.BadRequest).send();
+            return;
+        }
+
+        const numClinique: number = req.query.numClinique;
+        const proprietaires: Array<Proprietaire> = await this.service.getProprietaires(numClinique);
+
+        res.status(StatusCodes.Ok)
+            .send(proprietaires);
     }
     
 }

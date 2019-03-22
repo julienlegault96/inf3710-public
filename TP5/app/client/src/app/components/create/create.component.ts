@@ -4,6 +4,8 @@ import { AnimalService } from "@services/animal.service";
 import { CliniqueService } from "@services/clinique.service";
 import { Clinique } from "@common/entities/clinique";
 import { Animal } from "@common/entities/animal";
+import { Proprietaire } from "@common/entities/proprietaire";
+import { ProprietaireService } from "@services/proprietaire.service";
 
 @Component({
     selector: "app-create",
@@ -14,6 +16,7 @@ import { Animal } from "@common/entities/animal";
 export class CreateComponent {
 
     public cliniques: Array<Clinique>;
+    public proprietaires: Array<Proprietaire>;
     public numclinique: number;
     public numproprietaire: number;
     public nom: string;
@@ -25,10 +28,14 @@ export class CreateComponent {
 
     private cliniqueService: CliniqueService;
     private animalService: AnimalService;
+    private proprietaireService: ProprietaireService;
 
-    public constructor(cliniqueService: CliniqueService, animalService: AnimalService) {
+    public constructor(cliniqueService: CliniqueService, animalService: AnimalService, proprietaireService: ProprietaireService) {
+        this.cliniques = [];
+        this.proprietaires = [];
         this.cliniqueService = cliniqueService;
         this.animalService = animalService;
+        this.proprietaireService = proprietaireService;
         this.numclinique = 0;
         this.numproprietaire = 1;
         this.nom = "";
@@ -73,6 +80,14 @@ export class CreateComponent {
         this.cliniqueService.getCliniques()
             .subscribe((cliniques: Array<Clinique>) => {
                 this.cliniques = cliniques;
+            });
+    }
+
+    private updateValidProprietaires(): void {
+        console.log("a");
+        this.proprietaireService.getProprietaires(this.numclinique)
+            .subscribe((proprietaires: Array<Proprietaire>) => {
+                this.proprietaires = proprietaires;
             });
     }
 

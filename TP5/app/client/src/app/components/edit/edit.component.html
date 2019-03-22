@@ -56,9 +56,9 @@
                     <fa-icon [icon]="['fas', 'heart']" [fixedWidth]="true"></fa-icon>
                     État
                 </label>
-                <select class="form-control" id="state">
-                    <option>Vivant</option>
-                    <option>Décédé</option>
+                <select class="form-control" id="state" [value]="animal.etat">
+                    <option value="vivant">Vivant</option>
+                    <option value="decede">Décédé</option>
                 </select>
             </div>
         </div>

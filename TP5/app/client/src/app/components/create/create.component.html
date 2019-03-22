@@ -12,18 +12,18 @@
                         <fa-icon [icon]="['fas', 'clinic-medical']" [fixedWidth]="true"></fa-icon>
                         Clinique
                     </label>
-                    <select class="form-control" id="clinic" [(ngModel)]="numclinique">
+                    <select class="form-control" id="clinic" [(ngModel)]="numclinique" (change)="updateValidProprietaires()">
                         <option *ngFor="let clinique of cliniques" [value]="clinique.numclinique">
                             {{clinique.rue}}
                         </option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="type">
-                        <fa-icon [icon]="['fas', 'paw']" [fixedWidth]="true"></fa-icon>
-                        Type
+                    <label for="name">
+                        <fa-icon [icon]="['fas', 'signature']" [fixedWidth]="true"></fa-icon>
+                        Nom
                     </label>
-                    <input type="text" class="form-control" id="type" [(ngModel)]="type">
+                    <input type="text" class="form-control" id="name" [(ngModel)]="nom">
                 </div>
                 <div class="form-group">
                     <label for="description">
@@ -35,11 +35,22 @@
             </div>
             <div class="col">
                 <div class="form-group">
-                    <label for="name">
-                        <fa-icon [icon]="['fas', 'signature']" [fixedWidth]="true"></fa-icon>
-                        Nom
+                    <label for="proprietaire">
+                        <fa-icon [icon]="['fas', 'user']" [fixedWidth]="true"></fa-icon>
+                        Proprietaire
                     </label>
-                    <input type="text" class="form-control" id="name" [(ngModel)]="nom">
+                    <select class="form-control" id="proprietaire" [(ngModel)]="numproprietaire" [disabled]="proprietaires.length === 0">
+                        <option *ngFor="let proprietaire of proprietaires" [value]="proprietaire.numproprietaire">
+                            {{proprietaire.prenom + " " + proprietaire.nom}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="type">
+                        <fa-icon [icon]="['fas', 'paw']" [fixedWidth]="true"></fa-icon>
+                        Type
+                    </label>
+                    <input type="text" class="form-control" id="type" [(ngModel)]="type">
                 </div>
                 <div class="form-group">
                     <label for="birthday">
