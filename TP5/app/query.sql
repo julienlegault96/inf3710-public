@@ -67,7 +67,7 @@ a.numProprietaire = p.numProprietaire GROUP BY p.numProprietaire
 EXCEPT
 SELECT p.numProprietaire, p.nom, p.prenom, p.rue, p.ville, p.province, 
 p.codePostal, p.telephone FROM Proprietaire p, Animal a, Traitement t, Operation o, Examen e WHERE
-t.description LIKE '&grippe%' AND
+t.description LIKE '%grippe%' AND
 t.numTraitement = o.numTraitement AND
 o.numExamen = e.numExamen AND 
 e.numAnimal = a.numAnimal AND 
@@ -75,3 +75,7 @@ a.type = 'Chien' AND
 a.numProprietaire = p.numProprietaire GROUP BY p.numProprietaire;
 --15) Lister tous les animaux d’une clinique donnée avec leurs traitements s’ils existent. Dans le
 --cas contraire, affichez null.
+SELECT e.numAnimal, o.numTraitement, o.date, o.quantite, o.dateDebut, o.dateFin FROM  Examen e
+LEFT JOIN Operation o
+ON e.numExamen = o.numExamen 
+WHERE e.numClinique = '2';

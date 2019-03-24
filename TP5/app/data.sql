@@ -67,6 +67,7 @@ insert into Examen VALUES(default, 1, 4, 1, 1, '2019-10-10', '16:30:00', 'Examen
 insert into Examen VALUES(default, 1, 4, 1, 1, '2020-01-10', '14:00:00', 'Examen routinier mois Janvier' );
 insert into Examen VALUES(default, 1, 4, 10, 3, '2019-01-10', '19:00:00', 'Examen du a une grippe' );
 insert into Examen VALUES(default, 1, 4, 9, 3, '2019-01-10', '19:00:00', 'Examen du a une grippe' );
+insert into Examen VALUES(default, 1, 4, 1, 1, '2019-06-06', '16:30:00', 'Vaccin contre grippe' );
 
 
 --Traitement
@@ -83,5 +84,6 @@ insert into Operation VALUES(1, 1, 1, '2019-06-09', 2, '15:30:00', '16:00:00'  )
 insert into Operation VALUES(2, 2, 2, '2019-06-01', 1, '9:30:00', '10:30:00'  );
 insert into Operation VALUES(2, 5, 1, '2019-03-01', 1, '9:30:00', '10:30:00'  );
 insert into Operation VALUES(2, 6, 1, '2019-03-01', 1, '9:30:00', '10:30:00'  );
+insert into Operation VALUES(2, 11, 1, '2019-03-01', 1, '9:30:00', '10:30:00'  );
 
 
