@@ -40,6 +40,7 @@ insert into Animal VALUES(default, 3, 'Alian', 'Chat', 'Chat malade', ' 2008-03-
 insert into Animal VALUES(default, 3, 'Alian2', 'Chat', 'Chat energetique', ' 2019-01-21', '2019-01-22', 'vivant' ); 
 insert into Animal VALUES(default, 4, 'Tigrou', 'Chien', 'Chien girs', ' 2016-03-24', '2018-04-30', 'vivant' ); 
 insert into Animal VALUES(default, 4, 'Phoenix', 'Oiseau', 'Oiseau en pleine sante', ' 2018-03-24', '2018-04-10', 'vivant' ); 
+insert into Animal VALUES(default, 4, 'Garfield', 'Chat', 'Chat qui aime la lasagne mais pas les lundi', ' 2017-03-24', '2017-04-10', 'vivant' ); 
 insert into Animal VALUES(default, 3, 'Fido', 'Chien', 'Chien energetique', ' 2019-01-21', '2019-01-22', 'vivant' ); 
 insert into Animal VALUES(default, 3, 'Fidoe', 'Chien', 'Chienne energetique', ' 2019-01-21', '2019-01-22', 'vivant' ); 
 insert into Animal VALUES(default, 3, 'Fifa', 'Chat', 'Chat fan de soccer', ' 2019-01-21', '2019-01-22', 'vivant' ); 

@@ -60,17 +60,18 @@ a.type = 'Chien' AND
 a.numProprietaire = p.numProprietaire;
 --14) Lister les détails des propriétaires qui ont un chat mais pas de chien vacciné contre la
 --grippe (la condition vacciné contre la grippe ne s’applique qu’aux chiens)
--- SELECT p.numProprietaire, p.nom, p.prenom, p.rue, p.ville, p.province, 
--- p.codePostal, p.telephone FROM Proprietaire p, Animal a WHERE
--- a.type = 'Chat' AND 
--- a.numProprietaire = p.numProprietaire EXCEPT
--- SELECT p.numProprietaire, p.nom, p.prenom, p.rue, p.ville, p.province, 
--- p.codePostal, p.telephone FROM Proprietaire p, Animal a, Traitement t, Operation o, Examen e 
--- WHERE
--- a.type = 'Chien' AND 
--- a.numAnimal = e.numAnimal AND
--- o.numExamen = e.numExamen AND
--- o.numTraitement = '2' AND
--- a.numProprietaire = p.numProprietaire ;
+SELECT p.numProprietaire, p.nom, p.prenom, p.rue, p.ville, p.province, 
+p.codePostal, p.telephone FROM Proprietaire p, Animal a WHERE
+a.type = 'Chat' AND 
+a.numProprietaire = p.numProprietaire GROUP BY p.numProprietaire 
+EXCEPT
+SELECT p.numProprietaire, p.nom, p.prenom, p.rue, p.ville, p.province, 
+p.codePostal, p.telephone FROM Proprietaire p, Animal a, Traitement t, Operation o, Examen e WHERE
+t.description LIKE '&grippe%' AND
+t.numTraitement = o.numTraitement AND
+o.numExamen = e.numExamen AND 
+e.numAnimal = a.numAnimal AND 
+a.type = 'Chien' AND 
+a.numProprietaire = p.numProprietaire GROUP BY p.numProprietaire;
 --15) Lister tous les animaux d’une clinique donnée avec leurs traitements s’ils existent. Dans le
 --cas contraire, affichez null.
