@@ -24,7 +24,7 @@ export class AnimalsRoute {
         router.get(`/${Endpoints.Animals}`, this.getAnimals.bind(this));
         router.post(`/${Endpoints.Animals}`, this.addAnimal.bind(this));
         router.put(`/${Endpoints.Animals}/:id`, this.updateAnimal.bind(this));
-        router.delete(`/${Endpoints.Animals}/:numClinique/:numAnimal`, this.deleteAnimal.bind(this));
+        router.delete(`/${Endpoints.Animals}/:numProprietaire/:numAnimal`, this.deleteAnimal.bind(this));
 
         return router;
     }
@@ -55,9 +55,9 @@ export class AnimalsRoute {
     }
 
     private async deleteAnimal(req: Request, res: Response): Promise<void> {
-        const numClinique: number = req.params.numClinique;
         const numAnimal: number = req.params.numAnimal;
-        const isDeleted: boolean = await this.service.deleteAnimal(numClinique, numAnimal);
+        const numProprietaire: number = req.params.numProprietaire;
+        const isDeleted: boolean = await this.service.deleteAnimal(numAnimal, numProprietaire);
 
         res.status(isDeleted ? StatusCodes.Ok : StatusCodes.BadRequest)
             .send();

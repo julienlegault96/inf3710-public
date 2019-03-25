@@ -65,11 +65,10 @@ export class AnimalService {
     public updateAnimal(id: number, animal: Animal): Promise<boolean> {
         const queryConfig: QueryConfig = {
             text:
-                "UPDATE public.Animal SET numProprietaire = $2, numClinique = $3, nom = $4, type = $5, description = $6, dob = $7, doi = $8, etat = $9 WHERE numAnimal = $1",
+                "UPDATE public.Animal SET numProprietaire = $2, nom = $3, type = $4, description = $5, dob = $6, doi = $7, etat = $8 WHERE numAnimal = $1 AND numProprietaire = $2",
             values: [
                 id,
                 animal.numproprietaire,
-                animal.numclinique,
                 animal.nom,
                 animal.type,
                 animal.description,
@@ -90,12 +89,12 @@ export class AnimalService {
             });
     }
 
-    public deleteAnimal(numClinique: number, numAnimal: number): Promise<boolean> {
+    public deleteAnimal(numAnimal: number, numProprietaire: number): Promise<boolean> {
         const queryConfig: QueryConfig = {
-            text: "DELETE FROM public.Animal WHERE numClinique = $1 AND numAnimal = $2",
+            text: "DELETE FROM public.Animal WHERE numAnimal = $1 AND numProprietaire = $2",
             values: [
-                numClinique,
-                numAnimal
+                numAnimal,
+                numProprietaire
             ],
         };
 

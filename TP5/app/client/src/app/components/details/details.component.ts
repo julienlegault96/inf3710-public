@@ -19,7 +19,8 @@ export class DetailsComponent {
     }
 
     public deleteAnimal(): void {
-        this.animalService.deleteAnimal(this.animal);
+        this.animalService.deleteAnimal(this.animal)
+            .subscribe();
     }
 
 }

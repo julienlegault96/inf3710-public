@@ -21,7 +21,7 @@ export class AnimalService extends AbstractRequestService {
     }
 
     public deleteAnimal(animal: Animal): Observable<void> {
-        return this.deleteRequest(Endpoints.Animals, `${animal.numclinique}/${animal.numanimal}`);
+        return this.deleteRequest(Endpoints.Animals, `${animal.numproprietaire}/${animal.numanimal}`);
     }
 
 }
