@@ -62,12 +62,12 @@ export class AnimalService {
             });
     }
 
-    public updateAnimal(id: number, animal: Animal): Promise<boolean> {
+    public updateAnimal(animal: Animal): Promise<boolean> {
         const queryConfig: QueryConfig = {
             text:
                 "UPDATE public.Animal SET numProprietaire = $2, nom = $3, type = $4, description = $5, dob = $6, doi = $7, etat = $8 WHERE numAnimal = $1 AND numProprietaire = $2",
             values: [
-                id,
+                animal.numanimal,
                 animal.numproprietaire,
                 animal.nom,
                 animal.type,
@@ -79,7 +79,7 @@ export class AnimalService {
         };
 
         return this.dbService.query(queryConfig)
-            .then(() => {
+            .then((response: QueryResult) => {
                 return true;
             })
             .catch((reason) => {

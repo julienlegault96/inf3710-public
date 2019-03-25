@@ -34,12 +34,12 @@ export abstract class AbstractRequestService {
         );
     }
 
-    protected putRequest<T>(serverEndpoint: Endpoints, body: T, pathParam?: string | null): Observable<T> {
+    protected putRequest<T>(serverEndpoint: Endpoints, body: T, pathParam?: string | null): Observable<void> {
         const options: {} = {
             headers: new HttpHeaders({ "Content-Type": "application/json" }),
         };
 
-        return this.http.put<T>(this.getUrl(serverEndpoint, pathParam), body, options).pipe(
+        return this.http.put<void>(this.getUrl(serverEndpoint, pathParam), body, options).pipe(
             catchError(this.handleError)
         );
     }

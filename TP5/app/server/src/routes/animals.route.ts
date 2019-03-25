@@ -23,7 +23,7 @@ export class AnimalsRoute {
 
         router.get(`/${Endpoints.Animals}`, this.getAnimals.bind(this));
         router.post(`/${Endpoints.Animals}`, this.addAnimal.bind(this));
-        router.put(`/${Endpoints.Animals}/:id`, this.updateAnimal.bind(this));
+        router.put(`/${Endpoints.Animals}`, this.updateAnimal.bind(this));
         router.delete(`/${Endpoints.Animals}/:numProprietaire/:numAnimal`, this.deleteAnimal.bind(this));
 
         return router;
@@ -46,9 +46,9 @@ export class AnimalsRoute {
     }
 
     private async updateAnimal(req: Request, res: Response): Promise<void> {
-        const id: number = req.params.id;
         const animal: Animal = req.body;
-        const isUpdated: boolean = await this.service.updateAnimal(id, animal);
+        console.log(animal);
+        const isUpdated: boolean = await this.service.updateAnimal(animal);
 
         res.status(isUpdated ? StatusCodes.Ok : StatusCodes.BadRequest)
             .send();

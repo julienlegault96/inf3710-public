@@ -14,12 +14,9 @@ export class ProprietairesService {
         this.dbService = dbService;
     }
 
-    public getProprietaires(numClinique: number): Promise<Array<Proprietaire>> {
+    public getProprietaires(): Promise<Array<Proprietaire>> {
         const queryConfig: QueryConfig = {
-            text: "SELECT Proprietaire.numproprietaire, nom, prenom, rue, ville, province, codepostal, telephone FROM Proprietaire, EnregistrementProprioClinique WHERE numClinique = $1 AND Proprietaire.numProprietaire = EnregistrementProprioClinique.numProprietaire",
-            values: [
-                numClinique
-            ],
+            text: "SELECT * FROM Proprietaire"
         };
 
         return this.dbService.query(queryConfig)

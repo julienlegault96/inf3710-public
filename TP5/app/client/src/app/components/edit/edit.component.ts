@@ -1,7 +1,8 @@
-import { Component, Input } from "@angular/core";
-import * as moment from "moment";
+import { Component, Input, OnInit } from "@angular/core";
 
 import { Animal } from "@common/entities/animal";
+import { Proprietaire } from "@common/entities/proprietaire";
+import { AnimalService } from "@services/animal.service";
 
 @Component({
     selector: "app-edit",
@@ -12,11 +13,23 @@ import { Animal } from "@common/entities/animal";
 export class EditComponent {
 
     @Input() public animal: Animal;
+    public proprietaires: Array<Proprietaire>;
 
-    public formatDate(date: string): string {
-        moment.locale("fr");
+    private readonly animalService: AnimalService;
 
-        return moment(date).format("YYYY-MM-DD");
+    public constructor(animalService: AnimalService) {
+        this.proprietaires = [];
+        this.animalService = animalService;
+        this.submit = this.submit.bind(this);
+    }
+
+    public submit(animal: Animal): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.animalService.updateAnimal(animal)
+            .subscribe(() => {
+                    resolve();
+                });
+        });
     }
 
 }

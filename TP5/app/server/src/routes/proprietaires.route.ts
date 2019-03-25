@@ -27,14 +27,7 @@ export class ProprietairesRoute {
     }
 
     private async getProprietaires(req: Request, res: Response): Promise<void> {
-        if (!req.query.numClinique) {
-            res.status(StatusCodes.BadRequest).send();
-
-            return;
-        }
-
-        const numClinique: number = req.query.numClinique;
-        const proprietaires: Array<Proprietaire> = await this.service.getProprietaires(numClinique);
+        const proprietaires: Array<Proprietaire> = await this.service.getProprietaires();
 
         res.status(StatusCodes.Ok)
             .send(proprietaires);

@@ -8,8 +8,8 @@ import { Proprietaire } from "@common/entities/proprietaire";
 @Injectable()
 export class ProprietaireService extends AbstractRequestService {
 
-    public getProprietaires(numClinique: number): Observable<Array<Proprietaire>> {
-        return this.getRequest(Endpoints.Proprietaire, undefined, {tag: "numClinique", value: numClinique});
+    public getProprietaires(): Observable<Array<Proprietaire>> {
+        return this.getRequest(Endpoints.Proprietaire);
     }
 
 }

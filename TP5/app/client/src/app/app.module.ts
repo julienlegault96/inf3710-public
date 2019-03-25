@@ -23,6 +23,7 @@ import { EditComponent } from "@components/edit/edit.component";
 import { TreatmentsComponent } from "@components/treatments/treatments.component";
 import { CliniqueService } from "@services/clinique.service";
 import { ProprietaireService } from "@services/proprietaire.service";
+import { AnimalFormComponent } from "@components/animal-form/animal-form.component";
 
 @NgModule({
     declarations: [
@@ -34,6 +35,7 @@ import { ProprietaireService } from "@services/proprietaire.service";
         DetailsComponent,
         EditComponent,
         TreatmentsComponent,
+        AnimalFormComponent
     ],
     imports: [
         BrowserModule,
