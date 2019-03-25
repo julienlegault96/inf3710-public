@@ -13,6 +13,7 @@ import { AnimalService } from "@services/animal.service";
 export class EditComponent {
 
     @Input() public animal: Animal;
+    @Input() public onUpdate: () => void;
     public proprietaires: Array<Proprietaire>;
 
     private readonly animalService: AnimalService;
@@ -28,6 +29,7 @@ export class EditComponent {
             this.animalService.updateAnimal(animal)
             .subscribe(() => {
                     resolve();
+                    this.onUpdate();
                 });
         });
     }

@@ -16,13 +16,13 @@
                     </h4>
                 </div>
                 <div class="float-right">
-                    <button type="button" class="close" data-dismiss="modal">
+                    <button #modalCloser type="button" class="close" data-dismiss="modal">
                         <fa-icon [icon]="['fas', 'times']"></fa-icon>
                     </button>
                 </div>
                 <div class="clearfix"></div>
                 <hr />
-                <app-edit [animal]="animal"></app-edit>
+                <app-edit [animal]="animal" [onUpdate]="update"></app-edit>
                 <app-treatments [animal]="animal"></app-treatments>
                 <button class="btn btn-danger btn-block" (click)="deleteAnimal()">
                     <fa-icon [icon]="['fas', 'times']" [fixedWidth]="true"></fa-icon>

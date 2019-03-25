@@ -55,7 +55,7 @@
                             {{ formatDate(animal.dob) }}
                         </td>
                         <td width="1">
-                            <app-details [animal]="animal"></app-details>
+                            <app-details [animal]="animal" [onUpdate]="update"></app-details>
                         </td>
                     </tr>
                 </tbody>

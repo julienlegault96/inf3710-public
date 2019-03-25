@@ -18,6 +18,7 @@ export class TableComponent implements OnInit {
     public constructor(animalService: AnimalService) {
         this.animals = [];
         this.animalService = animalService;
+        this.update = this.update.bind(this);
     }
 
     public ngOnInit(): void {
@@ -32,6 +33,10 @@ export class TableComponent implements OnInit {
 
     public filterAnimals(event: Event): void {
         this.updateAnimals((event.target as HTMLInputElement).value);
+    }
+
+    public update(): void {
+        this.updateAnimals();
     }
 
     private updateAnimals(filterName?: string): void {
