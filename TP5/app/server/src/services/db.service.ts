@@ -9,7 +9,12 @@ export class DBService {
 
     public constructor() {
         this.client = new Client(AUTHENTICATION);
-        this.client.connect();
+        this.client.connect()
+            // tslint:disable-next-line:no-any
+            .catch((error: any) => {
+                // tslint:disable-next-line:no-console
+                console.log(error);
+            });
     }
 
     // https://node-postgres.com/features/queries

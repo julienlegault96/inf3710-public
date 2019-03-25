@@ -10,7 +10,7 @@ import { Proprietaire } from "../../../common/entities/proprietaire";
 @injectable()
 export class ProprietairesRoute {
 
-    private service: ProprietairesService;
+    private readonly service: ProprietairesService;
 
     public constructor(
         @inject(ProprietairesService) service: ProprietairesService
@@ -21,7 +21,7 @@ export class ProprietairesRoute {
     public get(): Router {
         const router: Router = Router();
 
-        router.get(`/${Endpoints.Proprietaire}`, this.getProprietaires.bind(this))
+        router.get(`/${Endpoints.Proprietaire}`, this.getProprietaires.bind(this));
 
         return router;
     }
@@ -29,6 +29,7 @@ export class ProprietairesRoute {
     private async getProprietaires(req: Request, res: Response): Promise<void> {
         if (!req.query.numClinique) {
             res.status(StatusCodes.BadRequest).send();
+
             return;
         }
 
@@ -38,5 +39,5 @@ export class ProprietairesRoute {
         res.status(StatusCodes.Ok)
             .send(proprietaires);
     }
-    
+
 }

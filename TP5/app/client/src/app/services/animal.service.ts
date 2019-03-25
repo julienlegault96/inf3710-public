@@ -20,4 +20,8 @@ export class AnimalService extends AbstractRequestService {
         return this.postRequest(Endpoints.Animals, animal);
     }
 
+    public deleteAnimal(animal: Animal): Observable<void> {
+        return this.deleteRequest(Endpoints.Animals, `${animal.numclinique}/${animal.numanimal}`);
+    }
+
 }

@@ -15,21 +15,22 @@ import { ProprietaireService } from "@services/proprietaire.service";
 
 export class CreateComponent {
 
-    @ViewChild("clinique") clinique: ElementRef;
-    @ViewChild("proprietaire") proprietaire: ElementRef;
-    @ViewChild("nom") nom: ElementRef;
-    @ViewChild("type") type: ElementRef;
-    @ViewChild("description") description: ElementRef;
-    @ViewChild("dob") dob: ElementRef;
-    @ViewChild("doi") doi: ElementRef;
-    @ViewChild("etat") etat: ElementRef;
+    @ViewChild("clinique") private readonly clinique: ElementRef<HTMLSelectElement>;
+    @ViewChild("proprietaire") private readonly proprietaire: ElementRef<HTMLSelectElement>;
+    @ViewChild("nom") private readonly nom: ElementRef<HTMLInputElement>;
+    @ViewChild("type") private readonly type: ElementRef<HTMLInputElement>;
+    @ViewChild("description") private readonly description: ElementRef<HTMLTextAreaElement>;
+    @ViewChild("dob") private readonly dob: ElementRef<HTMLInputElement>;
+    @ViewChild("doi") private readonly doi: ElementRef<HTMLInputElement>;
+    @ViewChild("etat") private readonly etat: ElementRef<HTMLSelectElement>;
+    @ViewChild("modalCloser") private readonly modalCloser: ElementRef<HTMLButtonElement>;
 
     public cliniques: Array<Clinique>;
     public proprietaires: Array<Proprietaire>;
 
-    private cliniqueService: CliniqueService;
-    private animalService: AnimalService;
-    private proprietaireService: ProprietaireService;
+    private readonly cliniqueService: CliniqueService;
+    private readonly animalService: AnimalService;
+    private readonly proprietaireService: ProprietaireService;
 
     public constructor(cliniqueService: CliniqueService, animalService: AnimalService, proprietaireService: ProprietaireService) {
         this.cliniques = [];
@@ -59,8 +60,19 @@ export class CreateComponent {
 
         this.animalService.addAnimal(animal)
             .subscribe(() => {
-                console.log("succ");
+                this.modalCloser.nativeElement.click();
             });
+    }
+
+    public updateValidProprietaires(): void {
+        this.proprietaireService.getProprietaires(this.getNumClinique())
+            .subscribe((proprietaires: Array<Proprietaire>) => {
+                this.proprietaires = proprietaires;
+            });
+    }
+
+    public removeInvalidInput(event: Event): void {
+        (event.target as HTMLElement).classList.remove("is-invalid");
     }
 
     private getValidClinique(): void {
@@ -70,93 +82,82 @@ export class CreateComponent {
             });
     }
 
-    private updateValidProprietaires(): void {
-        this.proprietaireService.getProprietaires(this.getNumClinique())
-            .subscribe((proprietaires: Array<Proprietaire>) => {
-                this.proprietaires = proprietaires;
-            });
-    }
-
     private displayInvalidInputs(): boolean {
         let isValid: boolean = true;
 
         if (!this.getNumClinique()) {
-            (this.clinique.nativeElement as HTMLSelectElement).classList.add("is-invalid");
+            this.clinique.nativeElement.classList.add("is-invalid");
             isValid = false;
         }
 
         if (!this.getNumProprietaire()) {
-            (this.proprietaire.nativeElement as HTMLSelectElement).classList.add("is-invalid");
+            this.proprietaire.nativeElement.classList.add("is-invalid");
             isValid = false;
         }
 
         if (!this.getNom()) {
-            (this.nom.nativeElement as HTMLInputElement).classList.add("is-invalid");
+            this.nom.nativeElement.classList.add("is-invalid");
             isValid = false;
         }
 
         if (!this.getType()) {
-            (this.type.nativeElement as HTMLInputElement).classList.add("is-invalid");
+            this.type.nativeElement.classList.add("is-invalid");
             isValid = false;
         }
 
         if (!this.getDescription()) {
-            (this.description.nativeElement as HTMLInputElement).classList.add("is-invalid");
+            this.description.nativeElement.classList.add("is-invalid");
             isValid = false;
         }
 
         if (!this.getDob() || !this.getDob().match(/^\d\d\d\d-\d\d-\d\d$/)) {
-            (this.dob.nativeElement as HTMLInputElement).classList.add("is-invalid");
+            this.dob.nativeElement.classList.add("is-invalid");
             isValid = false;
         }
 
         if (!this.getDoi() || !this.getDob().match(/^\d\d\d\d-\d\d-\d\d$/)) {
-            (this.doi.nativeElement as HTMLInputElement).classList.add("is-invalid");
+            this.doi.nativeElement.classList.add("is-invalid");
             isValid = false;
         }
 
         if (!this.getEtat() || this.getEtat() !== "vivant" && this.getEtat() !== "decede") {
-            (this.etat.nativeElement as HTMLSelectElement).classList.add("is-invalid");
+            this.etat.nativeElement.classList.add("is-invalid");
             isValid = false;
         }
 
         return isValid;
     }
 
-    private removeInvalidInput(event: Event): void {
-        (event.target as HTMLElement).classList.remove("is-invalid");
-    }
-
     private getNumClinique(): number {
-        return parseInt((this.clinique.nativeElement as HTMLSelectElement).value);
+        return parseInt(this.clinique.nativeElement.value, 10);
     }
 
     private getNumProprietaire(): number {
-        return parseInt((this.proprietaire.nativeElement as HTMLSelectElement).value);
+        return parseInt(this.proprietaire.nativeElement.value, 10);
     }
 
     private getNom(): string {
-        return (this.nom.nativeElement as HTMLSelectElement).value;
+        return this.nom.nativeElement.value;
     }
 
     private getType(): string {
-        return (this.type.nativeElement as HTMLSelectElement).value;
+        return this.type.nativeElement.value;
     }
 
     private getDescription(): string {
-        return (this.description.nativeElement as HTMLSelectElement).value;
+        return this.description.nativeElement.value;
     }
 
     private getDob(): string {
-        return (this.dob.nativeElement as HTMLSelectElement).value;
+        return this.dob.nativeElement.value;
     }
 
     private getDoi(): string {
-        return (this.doi.nativeElement as HTMLSelectElement).value;
+        return this.doi.nativeElement.value;
     }
 
     private getEtat(): "vivant" | "decede" {
-        return (this.etat.nativeElement as HTMLSelectElement).value as "vivant" | "decede";
+        return this.etat.nativeElement.value as "vivant" | "decede";
     }
 
 }

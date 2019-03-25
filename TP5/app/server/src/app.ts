@@ -12,15 +12,15 @@ import { ProprietairesRoute } from "./routes/proprietaires.route";
 @injectable()
 export class App {
 
-    private animalsRoute: AnimalsRoute;
-    private cliniquesRoute: CliniquesRoute;
-    private proprietaireRoute: ProprietairesRoute;
-    private expressApp: Express.Application;
+    private readonly animalsRoute: AnimalsRoute;
+    private readonly cliniquesRoute: CliniquesRoute;
+    private readonly proprietaireRoute: ProprietairesRoute;
+    private readonly expressApp: Express.Application;
 
     public constructor(
         @inject(AnimalsRoute) animalsRoute: AnimalsRoute,
         @inject(CliniquesRoute) cliniquesRoute: CliniquesRoute,
-        @inject(ProprietairesRoute) proprietairesRoute: ProprietairesRoute,
+        @inject(ProprietairesRoute) proprietairesRoute: ProprietairesRoute
     ) {
         this.animalsRoute = animalsRoute;
         this.cliniquesRoute = cliniquesRoute;
@@ -35,6 +35,7 @@ export class App {
             .use(this.cliniquesRoute.get())
             .use(this.proprietaireRoute.get());
 
+        // tslint:disable-next-line:no-console
         console.log(`Listening on port ${ServerHost.Port}`);
         this.expressApp.listen(ServerHost.Port);
     }
@@ -44,7 +45,7 @@ export class App {
             .use(cors())
             .use(bodyParser.json({ limit: "10000kb" }))
             .use(bodyParser.urlencoded({ extended: true }))
-            .use(morgan("dev"))
+            .use(morgan("dev"));
     }
 
 }

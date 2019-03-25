@@ -6,6 +6,7 @@ import { Component } from "@angular/core";
     styleUrls: [],
 })
 
+// tslint:disable-next-line:no-unnecessary-class
 export class NavigationComponent {
 
 }

@@ -10,7 +10,7 @@ import { Clinique } from "../../../common/entities/clinique";
 @injectable()
 export class CliniquesRoute {
 
-    private service: CliniquesService;
+    private readonly service: CliniquesService;
 
     public constructor(
         @inject(CliniquesService) service: CliniquesService
@@ -21,7 +21,7 @@ export class CliniquesRoute {
     public get(): Router {
         const router: Router = Router();
 
-        router.get(`/${Endpoints.Cliniques}`, this.getCliniques.bind(this))
+        router.get(`/${Endpoints.Cliniques}`, this.getCliniques.bind(this));
 
         return router;
     }

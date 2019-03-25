@@ -13,7 +13,7 @@ import { Animal } from "@common/entities/animal";
 export class TableComponent implements OnInit {
 
     public animals: Array<Animal>;
-    private animalService: AnimalService;
+    private readonly animalService: AnimalService;
 
     public constructor(animalService: AnimalService) {
         this.animals = [];
@@ -30,7 +30,7 @@ export class TableComponent implements OnInit {
         return moment(date).format("YYYY-MM-DD");
     }
 
-    private filterAnimals(event: Event): void {
+    public filterAnimals(event: Event): void {
         this.updateAnimals((event.target as HTMLInputElement).value);
     }
 
@@ -39,18 +39,6 @@ export class TableComponent implements OnInit {
             .subscribe((animals: Array<Animal>) => {
                 this.animals = animals;
             });
-    }
-
-    public show(): void {
-        // const myModal = document.getElementById("exampleModalLabel");
-        // myModal.modal("show");
-
-        // console.log(bs);
-
-        // const myModalInstance = new bsn.Modal(myModal);
-
-        // console.log(myModalInstance.show);
-        // myModalInstance.show();
     }
 
 }

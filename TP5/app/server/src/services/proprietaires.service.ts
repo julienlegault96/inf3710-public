@@ -6,7 +6,7 @@ import { Proprietaire } from "../../../common/entities/proprietaire";
 @injectable()
 export class ProprietairesService {
 
-    private dbService: DBService;
+    private readonly dbService: DBService;
 
     public constructor(
         @inject(DBService) dbService: DBService

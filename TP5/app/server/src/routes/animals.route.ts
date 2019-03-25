@@ -10,7 +10,7 @@ import { Animal } from "../../../common/entities/animal";
 @injectable()
 export class AnimalsRoute {
 
-    private service: AnimalService;
+    private readonly service: AnimalService;
 
     public constructor(
         @inject(AnimalService) service: AnimalService
@@ -21,40 +21,10 @@ export class AnimalsRoute {
     public get(): Router {
         const router: Router = Router();
 
-        /*
-         * query param:
-         *  filterName: string that should be contained it the returned animal name
-         * response:
-         *  200 status code
-         *  a list of animals
-         */
         router.get(`/${Endpoints.Animals}`, this.getAnimals.bind(this));
-
-        /*
-         * body:
-         *  an animal object without the need to specify an id
-         * response:
-         *  200 or 400 status code
-         */
         router.post(`/${Endpoints.Animals}`, this.addAnimal.bind(this));
-
-        /*
-         * param:
-         *  id: the animal id to be modified
-         * body:
-         *  an animal object without the need to specify an id
-         * response:
-         *  200 or 400 status code
-         */
         router.put(`/${Endpoints.Animals}/:id`, this.updateAnimal.bind(this));
-
-        /*
-         * param:
-         *  id: the animal id to be deleted
-         * response:
-         *  200 or 400 status code
-         */
-        router.delete(`/${Endpoints.Animals}/:id`, this.deleteAnimal.bind(this));
+        router.delete(`/${Endpoints.Animals}/:numClinique/:numAnimal`, this.deleteAnimal.bind(this));
 
         return router;
     }
@@ -85,8 +55,9 @@ export class AnimalsRoute {
     }
 
     private async deleteAnimal(req: Request, res: Response): Promise<void> {
-        const id: number = req.params.id;
-        const isDeleted: boolean = await this.service.deleteAnimal(id);
+        const numClinique: number = req.params.numClinique;
+        const numAnimal: number = req.params.numAnimal;
+        const isDeleted: boolean = await this.service.deleteAnimal(numClinique, numAnimal);
 
         res.status(isDeleted ? StatusCodes.Ok : StatusCodes.BadRequest)
             .send();

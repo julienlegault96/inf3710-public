@@ -14,7 +14,7 @@ export class TreatmentsComponent {
 
     @Input() public animal: Animal;
     public treatments: Array<Traitement>;
-    private treatmentsService: TreatmentsService;
+    private readonly treatmentsService: TreatmentsService;
 
     public constructor(treatmentsService: TreatmentsService) {
         this.treatmentsService = treatmentsService;

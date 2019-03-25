@@ -6,7 +6,7 @@ import { QueryResult, QueryConfig } from "pg";
 @injectable()
 export class AnimalService {
 
-    private dbService: DBService;
+    private readonly dbService: DBService;
 
     public constructor(
         @inject(DBService) dbService: DBService
@@ -15,7 +15,7 @@ export class AnimalService {
     }
 
     public getAnimals(filterName?: string): Promise<Array<Animal>> {
-        let queryConfig: QueryConfig = {
+        const queryConfig: QueryConfig = {
             text: "SELECT * FROM public.Animal"
         };
 
@@ -90,11 +90,12 @@ export class AnimalService {
             });
     }
 
-    public deleteAnimal(numanimal: number): Promise<boolean> {
+    public deleteAnimal(numClinique: number, numAnimal: number): Promise<boolean> {
         const queryConfig: QueryConfig = {
-            text: "DELETE FROM public.Animal WHERE numAnimal = $1",
+            text: "DELETE FROM public.Animal WHERE numClinique = $1 AND numAnimal = $2",
             values: [
-                numanimal
+                numClinique,
+                numAnimal
             ],
         };
 

@@ -6,7 +6,7 @@ import { Clinique } from "../../../common/entities/clinique";
 @injectable()
 export class CliniquesService {
 
-    private dbService: DBService;
+    private readonly dbService: DBService;
 
     public constructor(
         @inject(DBService) dbService: DBService

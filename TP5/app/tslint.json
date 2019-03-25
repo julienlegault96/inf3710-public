@@ -12,7 +12,7 @@
         "no-var-requires": true,
         "only-arrow-functions": true,
         "prefer-for-of": true,
-        "promise-function-async": true,
+        "promise-function-async": false,
         "unified-signatures": true,
         // Functionnality
         "await-promise": true,
@@ -46,7 +46,7 @@
         "no-submodule-imports": false,
         "no-switch-case-fall-through": true,
         "no-this-assignment": true,
-        "no-unbound-method": true,
+        "no-unbound-method": false,
         "no-unnecessary-class": true,
         "no-unsafe-finally": true,
         "no-unused-expression": true,

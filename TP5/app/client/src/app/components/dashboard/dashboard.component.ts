@@ -12,7 +12,7 @@ import { Animal } from "@common/entities/animal";
 export class DashboardComponent implements OnInit {
 
     public animals: Array<Animal>;
-    private animalService: AnimalService;
+    private readonly animalService: AnimalService;
 
     public constructor(animalService: AnimalService) {
         this.animals = [];
