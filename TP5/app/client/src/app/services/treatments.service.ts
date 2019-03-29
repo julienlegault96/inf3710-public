@@ -9,4 +9,8 @@ export class TreatmentsService extends AbstractRequestService {
         return this.getRequest(`${Endpoints.Animals}/${numAnimal}/traitements`);
     }
 
+    public getTreatmentsCost(numAnimal: number): Observable<number> {
+        return this.getRequest(`${Endpoints.Animals}/${numAnimal}/traitements/cout`);
+    }
+
 }

@@ -50,7 +50,6 @@ export class AnimalsRoute {
 
     private async updateAnimal(req: Request, res: Response): Promise<void> {
         const animal: Animal = req.body;
-        console.log(animal);
         const isUpdated: boolean = await this.service.updateAnimal(animal);
 
         res.status(isUpdated ? StatusCodes.Ok : StatusCodes.BadRequest)
@@ -74,9 +73,12 @@ export class AnimalsRoute {
             .send(treatments);
     }
 
-    private async getAnimalCost(req: Request, res: Response): Promise<void>{
-        const numAnimal : number = req.params.numAnimal;
-        res.status(StatusCodes.Ok).send(this.service.getAnimalCost(numAnimal));
+    private async getAnimalCost(req: Request, res: Response): Promise<void> {
+        const numAnimal: number = req.params.numAnimal;
+        const cost: any = await this.service.getAnimalCost(numAnimal).catch(console.log);
 
+        res.status(200)
+            .send(cost);
     }
+
 }

@@ -14,11 +14,13 @@ export class TreatmentsComponent {
 
     @Input() public animal: Animal;
     public treatments: Array<Traitement>;
+    public cost: number;
     private readonly treatmentsService: TreatmentsService;
 
     public constructor(treatmentsService: TreatmentsService) {
         this.treatmentsService = treatmentsService;
         this.treatments = [];
+        this.cost = 0;
     }
 
     public ngOnInit(): void {
@@ -26,6 +28,12 @@ export class TreatmentsComponent {
             this.treatmentsService.getTreatments(this.animal.numanimal)
                 .subscribe((treatments: Array<Traitement>) => {
                     this.treatments = treatments;
+                });
+            this.treatmentsService.getTreatmentsCost(this.animal.numanimal)
+                .subscribe((cost: number) => {
+                    if (cost) {
+                        this.cost = cost;
+                    }
                 });
         }
     }
