@@ -6,6 +6,7 @@ import { StatusCodes } from "../status-codes";
 
 import { AnimalService } from "../services/animal.service";
 import { Animal } from "../../../common/entities/animal";
+import { Traitement } from "../../../common/entities/traitement";
 
 @injectable()
 export class AnimalsRoute {
@@ -25,6 +26,7 @@ export class AnimalsRoute {
         router.post(`/${Endpoints.Animals}`, this.addAnimal.bind(this));
         router.put(`/${Endpoints.Animals}`, this.updateAnimal.bind(this));
         router.delete(`/${Endpoints.Animals}/:numProprietaire/:numAnimal`, this.deleteAnimal.bind(this));
+        router.get(`/${Endpoints.Animals}/:numAnimal/traitements`, this.getTreatments.bind(this));
 
         return router;
     }
@@ -61,6 +63,14 @@ export class AnimalsRoute {
 
         res.status(isDeleted ? StatusCodes.Ok : StatusCodes.BadRequest)
             .send();
+    }
+
+    private async getTreatments(req: Request, res: Response): Promise<void> {
+        const numAnimal: number = req.params.numAnimal;
+        const treatments: Array<Traitement> = await this.service.getTreatments(numAnimal);
+
+        res.status(StatusCodes.Ok)
+            .send(treatments);
     }
 
 }

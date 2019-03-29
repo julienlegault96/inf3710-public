@@ -2,6 +2,7 @@ import { injectable, inject } from "inversify";
 import { Animal } from "../../../common/entities/animal";
 import { DBService } from "./db.service";
 import { QueryResult, QueryConfig } from "pg";
+import { Traitement } from "../../../common/entities/traitement";
 
 @injectable()
 export class AnimalService {
@@ -106,6 +107,25 @@ export class AnimalService {
                 this.logQueryError(reason);
 
                 return false;
+            });
+    }
+
+    public getTreatments(numAnimal: number): Promise<Array<Traitement>> {
+        const queryConfig: QueryConfig = {
+            text: "SELECT t.numTraitement, t.description, t.cout FROM Operation o, Examen e, traitement t WHERE o.numexamen = e.numexamen AND o.numtraitement = t.numtraitement AND e.numanimal = $1",
+            values: [
+                numAnimal
+            ]
+        };
+
+        return this.dbService.query(queryConfig)
+            .then((response: QueryResult) => {
+                return response.rows;
+            })
+            .catch((reason) => {
+                this.logQueryError(reason);
+
+                return [];
             });
     }
 

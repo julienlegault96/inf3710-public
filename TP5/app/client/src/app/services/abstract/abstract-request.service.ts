@@ -17,7 +17,7 @@ export abstract class AbstractRequestService {
         this.http = http;
     }
 
-    protected getRequest<T>(serverEndpoint: Endpoints, pathParam?: string | null, ...queryParams: Array<Query>): Observable<T> {
+    protected getRequest<T>(serverEndpoint: string, pathParam?: string | null, ...queryParams: Array<Query>): Observable<T> {
         return this.http.get<T>(this.getUrl(serverEndpoint, pathParam, ...queryParams)).pipe(
             catchError(this.handleError)
         );
@@ -71,7 +71,7 @@ export abstract class AbstractRequestService {
         return throwError("Something bad happened; please try again later.");
     }
 
-    protected getUrl(serverEndpoint: Endpoints, pathParam?: string | null, ...queryParams: Array<Query>): string {
+    protected getUrl(serverEndpoint: string, pathParam?: string | null, ...queryParams: Array<Query>): string {
         let url: string = this.appendEndpoint(serverEndpoint);
         url += this.formatPathParam(pathParam);
         url += this.formatQueryParams(...queryParams);
@@ -79,7 +79,7 @@ export abstract class AbstractRequestService {
         return url;
     }
 
-    private appendEndpoint(serverEndpoint: Endpoints): string {
+    private appendEndpoint(serverEndpoint: string): string {
         return `${ServerHost.Address}/${serverEndpoint}`;
     }
 
