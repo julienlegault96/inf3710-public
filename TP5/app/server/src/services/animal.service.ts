@@ -127,6 +127,29 @@ export class AnimalService {
 
                 return [];
             });
+        }
+
+    public getAnimalCost(numAnimal:number): Promise<number> {
+        const queryConfig : QueryConfig = {
+            text: "SELECT SUM(cout) AS coutTotal FROM Traitement t, Operation o, Examen e" + 
+            "WHERE t.numTraitement = o.numTraitement AND o.numExamen = e.numExamen AND e.numAnimal = $1";
+            values:[
+                numAnimal
+            ]
+        };
+        
+        return this.dbService.query(queryConfig)
+        .then((response: QueryResult) => {
+            return response.rows[0].couttotal;
+        })
+        .catch((reason) => {
+            this.logQueryError(reason);
+
+            return 0;
+        });
+
+        
+
     }
 
     // tslint:disable-next-line:no-any

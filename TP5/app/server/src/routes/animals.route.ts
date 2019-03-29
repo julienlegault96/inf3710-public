@@ -27,6 +27,7 @@ export class AnimalsRoute {
         router.put(`/${Endpoints.Animals}`, this.updateAnimal.bind(this));
         router.delete(`/${Endpoints.Animals}/:numProprietaire/:numAnimal`, this.deleteAnimal.bind(this));
         router.get(`/${Endpoints.Animals}/:numAnimal/traitements`, this.getTreatments.bind(this));
+        router.get(`/${Endpoints.Animals}/:numAnimal/traitements/cout`, this.getAnimalCost.bind(this));
 
         return router;
     }
@@ -73,4 +74,9 @@ export class AnimalsRoute {
             .send(treatments);
     }
 
+    private async getAnimalCost(req: Request, res: Response): Promise<void>{
+        const numAnimal : number = req.params.numAnimal;
+        res.status(StatusCodes.Ok).send(this.service.getAnimalCost(numAnimal));
+
+    }
 }
