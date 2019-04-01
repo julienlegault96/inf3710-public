@@ -1,6 +1,6 @@
 <div class="text-center">
     <button type="button" data-toggle="modal" [attr.data-target]="'#detailsModal' + animal.numanimal"
-        class="btn btn-info">
+        class="btn btn-info" (click)="loadContent()">
         <fa-icon [icon]="['fas', 'ellipsis-h']"></fa-icon>
     </button>
 </div>
@@ -22,8 +22,10 @@
                 </div>
                 <div class="clearfix"></div>
                 <hr />
-                <app-edit [animal]="animal" [onUpdate]="update"></app-edit>
-                <app-treatments [animal]="animal"></app-treatments>
+                <div *ngIf="isContentLoaded">
+                    <app-edit [animal]="animal" [onUpdate]="update"></app-edit>
+                    <app-treatments [animal]="animal"></app-treatments>
+                </div>
                 <button class="btn btn-danger btn-block" (click)="deleteAnimal()">
                     <fa-icon [icon]="['fas', 'times']" [fixedWidth]="true"></fa-icon>
                     Supprimer cet animal

@@ -11,11 +11,13 @@ import { Animal } from "@common/entities/animal";
 
 export class CreateComponent {
 
+    public isContentLoaded: boolean;
     @ViewChild("modalCloser") private readonly modalCloser: ElementRef<HTMLButtonElement>;
     private readonly animalService: AnimalService;
 
     public constructor(animalService: AnimalService) {
         this.animalService = animalService;
+        this.isContentLoaded = false;
         this.submit = this.submit.bind(this);
     }
 
@@ -27,6 +29,10 @@ export class CreateComponent {
                     resolve();
                 });
         });
+    }
+
+    public loadContent(): void {
+        this.isContentLoaded = true;
     }
 
 }

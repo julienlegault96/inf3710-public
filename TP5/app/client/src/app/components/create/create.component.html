@@ -1,4 +1,4 @@
-<button class="btn btn-outline-success btn-block mb-3" data-toggle="modal" data-target="#addModal">
+<button class="btn btn-outline-success btn-block mb-3" data-toggle="modal" data-target="#addModal" (click)="loadContent()">
     <fa-icon [icon]="['fas', 'plus']" [fixedWidth]="true"></fa-icon>
     Ajouter un animal
 </button>
@@ -20,7 +20,9 @@
                 </div>
                 <div class="clearfix"></div>
                 <hr />
-                <app-animal-form [onSubmit]="submit" submitText="Ajouter" submitIcon="plus"></app-animal-form>
+                <div *ngIf="isContentLoaded">
+                    <app-form [onSubmit]="submit" submitText="Ajouter" submitIcon="plus"></app-form>
+                </div>
             </div>
         </div>
     </div>

@@ -33,8 +33,8 @@ export class AnimalsRoute {
     }
 
     private async getAnimals(req: Request, res: Response): Promise<void> {
-        const filterName: string | undefined = req.query.filterName;
-        const animals: Array<Animal> = await this.service.getAnimals(filterName);
+        const name: string | undefined = req.query.name;
+        const animals: Array<Animal> = await this.service.getAnimals(name);
 
         res.status(StatusCodes.Ok)
             .send(animals);

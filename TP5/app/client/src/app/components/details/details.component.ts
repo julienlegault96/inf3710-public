@@ -12,12 +12,14 @@ import { AnimalService } from "@services/animal.service";
 export class DetailsComponent {
 
     @Input() public animal: Animal;
-    @Input() public onUpdate: () => void;
+    public isContentLoaded: boolean;
+    @Input() private readonly onUpdate: () => void;
     @ViewChild("modalCloser") private readonly modalCloser: ElementRef<HTMLButtonElement>;
     private readonly animalService: AnimalService;
 
     public constructor(animalService: AnimalService) {
         this.animalService = animalService;
+        this.isContentLoaded = false;
         this.update = this.update.bind(this);
     }
 
@@ -32,6 +34,10 @@ export class DetailsComponent {
     public update(): void {
         this.modalCloser.nativeElement.click();
         this.onUpdate();
+    }
+
+    public loadContent(): void {
+        this.isContentLoaded = true;
     }
 
 }

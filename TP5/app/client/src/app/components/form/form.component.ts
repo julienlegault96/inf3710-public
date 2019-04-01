@@ -6,12 +6,12 @@ import { Proprietaire } from "@common/entities/proprietaire";
 import { ProprietaireService } from "@services/proprietaire.service";
 
 @Component({
-    selector: "app-animal-form",
-    templateUrl: "./animal-form.component.html",
+    selector: "app-form",
+    templateUrl: "./form.component.html",
     styleUrls: [],
 })
 
-export class AnimalFormComponent implements OnInit {
+export class FormComponent implements OnInit {
 
     @Input() public onSubmit: (animal: Animal) => Promise<void>;
     @Input() public submitText: string;

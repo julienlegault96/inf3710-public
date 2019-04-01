@@ -15,15 +15,15 @@ export class AnimalService {
         this.dbService = dbService;
     }
 
-    public getAnimals(filterName?: string): Promise<Array<Animal>> {
+    public getAnimals(name?: string): Promise<Array<Animal>> {
         const queryConfig: QueryConfig = {
             text: "SELECT * FROM public.Animal"
         };
 
-        if (filterName) {
+        if (name) {
             queryConfig.text += " WHERE LOWER(nom) LIKE $1";
             queryConfig.values = [
-                "%" + filterName.toLowerCase() + "%"
+                "%" + name.toLowerCase() + "%"
             ];
         }
 
