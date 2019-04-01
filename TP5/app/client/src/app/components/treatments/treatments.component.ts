@@ -28,7 +28,15 @@ export class TreatmentsComponent {
             this.treatmentsService.getTreatments(this.animal.numanimal)
                 .subscribe((treatments: Array<Traitement>) => {
                     this.treatments = treatments;
+
+                    if (this.treatments.length === 0) {
+                        this.treatments.push({
+                            description: "Aucun traitement",
+                            cout: ("" as any)
+                        });
+                    }
                 });
+
             this.treatmentsService.getTreatmentsCost(this.animal.numanimal)
                 .subscribe((cost: number) => {
                     if (cost) {
