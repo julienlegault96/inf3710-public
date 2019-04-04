@@ -31,6 +31,14 @@ CREATE TABLE IF NOT EXISTS Clinique(
 	FOREIGN KEY (numEmploye) references Employe(numEmploye)
 );
 
+CREATE TABLE IF NOT EXISTS EnregistrementEmployeClinique (
+	numEmploye SERIAL,
+	numClinique SERIAL,
+	PRIMARY KEY (numEmploye),
+	FOREIGN KEY (numEmploye) REFERENCES Employe(numEmploye),
+	FOREIGN KEY (numClinique) REFERENCES Clinique(numClinique)
+);
+
 CREATE TABLE IF NOT EXISTS Proprietaire (
 	numProprietaire SERIAL,
 	nom VARCHAR(25) NOT NULL,

@@ -20,13 +20,11 @@ AND e.numProprietaire = p.numProprietaire
 AND e.numClinique = 1;
 
 --4) Lister l’ensemble des examens d’un animal donné
---TODO demander si c'est seulement ca
 SELECT * 
 FROM examen 
 WHERE numAnimal = 1;
 
 --5) Lister le détail des traitements d’un animal suite à un examen donné
---TODO ??????????
 SELECT t.numTraitement, t.description, t.cout 
 FROM traitement t, Operation o, Examen e 
 WHERE e.numExamen = 1
@@ -34,7 +32,10 @@ AND e.numExamen = o.numExamen
 AND o.numTraitement = t.numTraitement;
 
 --6) Lister le salaire total des employés par clinique ordonné par numéro de clinique
---TODO ajouter une table liant Clinique avec Employe
+SELECT ce.numClinique, SUM(e.salaire) salaireTotal
+FROM EnregistrementEmployeClinique ce, Employe e
+WHERE ce.numEmploye = e.numEmploye
+GROUP BY ce.numClinique;
 
 --7) Lister le nombre total d’animaux d’un type donné (vous pouvez le choisir) dans chaque
 --clinique
@@ -49,10 +50,9 @@ SELECT min(cout), max(cout), avg(cout)
 FROM Traitement; 
 
 --9) Quels sont les noms des employés de plus de 50 ans ordonnés par nom ?
--- TODO peut etre ajouter soustraction mois et jours
 SELECT nom, prenom
 FROM Employe
-WHERE DATE_PART('year', current_date) - DATE_PART('year', dob) > 50
+WHERE DATE_PART('year', AGE(current_date, dob)) > 50
 ORDER BY nom;
 
 --10) Quels sont les propriétaires dont le nom contient « blay » ?
@@ -66,15 +66,18 @@ WHERE nom = 'Tremblay'
 AND prenom = 'Jean'
 AND fonction = 'veterinaire';
 
+--12) Lister les détails des propriétaires qui ont un chat et un chien 
+SELECT p.numProprietaire, p.nom, p.prenom, p.rue, p.ville, p.province, p.codePostal, p.telephone 
+FROM Proprietaire p, Animal a 
+WHERE a.type = 'Chat' 
+AND a.numProprietaire = p.numProprietaire
+INTERSECT
+SELECT p.numProprietaire, p.nom, p.prenom, p.rue, p.ville, p.province, p.codePostal, p.telephone
+FROM Proprietaire p, Animal a
+WHERE a.type = 'Chien'
+AND a.numProprietaire = p.numProprietaire;
+
 --13) Lister les détails des propriétaires qui ont un chat ou un chien
---SELECT p.numProprietaire, p.nom, p.prenom, p.rue, p.ville, p.province, 
---p.codePostal, p.telephone FROM Proprietaire p, Animal a WHERE
---a.type = 'Chat' AND 
---a.numProprietaire = p.numProprietaire INTERSECT
---SELECT p.numProprietaire, p.nom, p.prenom, p.rue, p.ville, p.province, 
---p.codePostal, p.telephone FROM Proprietaire p, Animal a WHERE
---a.type = 'Chien' AND
---a.numProprietaire = p.numProprietaire;
 SELECT p.numProprietaire, p.nom, p.prenom, p.rue, p.ville, p.province, p.codePostal, p.telephone
 FROM Proprietaire p, Animal a
 WHERE a.type = 'Chat'
@@ -105,8 +108,18 @@ GROUP BY p.numProprietaire;
 
 --15) Lister tous les animaux d’une clinique donnée avec leurs traitements s’ils existent. Dans le
 --cas contraire, affichez null.
---TODO resultats etranges avec numClinique = 1
-SELECT e.numAnimal, o.numTraitement, o.date, o.quantite, o.dateDebut, o.dateFin
-FROM  Examen e
-LEFT JOIN Operation o ON e.numExamen = o.numExamen 
-WHERE e.numClinique = 2;
+SELECT Fooo.numAnimal, t.numTraitement, t.description, t.cout
+FROM (
+	SELECT *
+	FROM (
+		SELECT ac.numAnimal, e.numExamen
+		FROM EnregistrementAnimalClinique ac
+		LEFT JOIN Examen e ON e.numAnimal = ac.numAnimal
+		WHERE ac.numClinique = 1
+	) AS Foo
+	LEFT JOIN Operation o ON Foo.numExamen = o.numExamen
+	WHERE (Foo.numExamen IS NOT NULL AND numTraitement IS NOT NULL)
+	OR (Foo.numExamen IS NULL AND numTraitement IS NULL)
+) AS Fooo
+LEFT JOIN Traitement t ON Fooo.numTraitement = t.numTraitement
+ORDER BY numAnimal;

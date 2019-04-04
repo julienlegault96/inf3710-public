@@ -17,6 +17,15 @@ insert into Employe VALUES (DEFAULT, 'Tremblay', 'Jean', '6100 rue Lacombe', 'Mo
 insert into Clinique VALUES (default, 1, '3030 cote des neiges', 'Montreal' , 'Quebec', 'H4H 6H6', '5145557677', '5144441233' );
 insert into Clinique VALUES (default, 6, '123 Grande Allee', 'Quebec' , 'Quebec', 'O8Y 0W2', '4181234567', '4180993321' );
 
+--EnregistrementEmployeClinique
+insert into EnregistrementEmployeClinique VALUES(1, 1);
+insert into EnregistrementEmployeClinique VALUES(2, 1);
+insert into EnregistrementEmployeClinique VALUES(3, 1);
+insert into EnregistrementEmployeClinique VALUES(5, 2);
+insert into EnregistrementEmployeClinique VALUES(6, 2);
+insert into EnregistrementEmployeClinique VALUES(7, 2);
+insert into EnregistrementEmployeClinique VALUES(8, 2);
+
 --Prorpietaire
 insert into Proprietaire VALUES (default, 'Lejeune', 'Michel', '123 Edouard-Montpetit', 'Montreal', 'Quebec', 'H6T 5R4', '4381234567' );
 insert into Proprietaire VALUES (default, 'Tremblay', 'Michelle', '123 rue Gertrude', 'Levis', 'Quebec', 'J8T 5R4', '4181234567' );
