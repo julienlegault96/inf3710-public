@@ -38,7 +38,7 @@ export class TreatmentsComponent {
                 });
 
             this.treatmentsService.getTreatmentsCost(this.animal.numanimal)
-                .subscribe((cost: number) => {
+                .subscribe(({ cost }: any) => {
                     if (cost) {
                         this.cost = cost;
                     }

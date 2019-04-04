@@ -16,8 +16,8 @@
                 <fa-icon [icon]="['fas', 'user']" [fixedWidth]="true"></fa-icon>
                 Propriétaire
             </label>
-            <select #proprietaire class="form-control" id="proprietaire" [disabled]="proprietaires.length === 0"
-                tabindex="3" (change)="removeInvalidInput($event)">
+            <select #proprietaire class="form-control" id="proprietaire"
+                [disabled]="!!animal || proprietaires.length === 0" tabindex="3" (change)="removeInvalidInput($event)">
                 <option disabled selected hidden></option>
                 <option *ngFor="let proprietaire of proprietaires" [value]="proprietaire.numproprietaire"
                     [selected]="animal && animal.numproprietaire === proprietaire.numproprietaire">

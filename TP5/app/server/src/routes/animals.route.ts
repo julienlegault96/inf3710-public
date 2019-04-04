@@ -75,10 +75,10 @@ export class AnimalsRoute {
 
     private async getAnimalCost(req: Request, res: Response): Promise<void> {
         const numAnimal: number = req.params.numAnimal;
-        const cost: any = await this.service.getAnimalCost(numAnimal).catch(console.log);
+        const cost: number = await this.service.getAnimalCost(numAnimal);
 
-        res.status(200)
-            .send(cost);
+        res.status(StatusCodes.Ok)
+            .send({ cost: cost });
     }
 
 }
