@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from "@angular/core";
+import { Component, ViewChild, ElementRef, Input } from "@angular/core";
 
 import { AnimalService } from "@services/animal.service";
 import { Animal } from "@common/entities/animal";
@@ -12,6 +12,7 @@ import { Animal } from "@common/entities/animal";
 export class CreateComponent {
 
     public isContentLoaded: boolean;
+    @Input() private readonly onUpdate: () => void;
     @ViewChild("modalCloser") private readonly modalCloser: ElementRef<HTMLButtonElement>;
     private readonly animalService: AnimalService;
 
@@ -26,6 +27,7 @@ export class CreateComponent {
             this.animalService.addAnimal(animal)
                 .subscribe((a) => {
                     this.modalCloser.nativeElement.click();
+                    this.onUpdate();
                     resolve();
                 });
         });
